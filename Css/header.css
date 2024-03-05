@@ -12,19 +12,17 @@
 
 .headerLinks ul{
     display: flex;
-    gap: 20px;
-    
-
+    gap: 55px;
 }
+
 .headerLinks{
    flex: 1;
-   
 }
 
 .logoIcon img{
     height: 80px;
     width: auto;
-    margin-right: 4%;
+    margin-left: 5%;
 }
 
 .logoIcon{

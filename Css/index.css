@@ -1,0 +1,45 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.frontScreen{
+    height: 110vh;
+    width: 100%;
+    display: flex;
+    background-color: rgb(59, 59, 102);
+    align-items: center;
+    gap: 3%;
+}
+
+.frontScreenLeft{
+    height: 100vh;
+    background-color: red;
+    flex: 2;
+}
+
+.frontScreenRight{
+    background-color: yellowgreen;
+    height: 90vh;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3%;
+    margin-right: 2%;
+}
+
+.rightScreen1{
+    height: 30vh;
+    background-color: black;
+}
+
+.rightScreen2{
+    height: 30vh;
+    background-color: yellow;
+}
+
+.rightScreen3{
+    height: 30vh;
+    background-color: purple;
+}
