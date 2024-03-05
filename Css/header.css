@@ -1,0 +1,41 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.navbar{
+    background-color: black;
+    display: flex;
+    align-items: center;
+}
+
+.headerLinks ul{
+    display: flex;
+    gap: 20px;
+    
+
+}
+.headerLinks{
+   flex: 1;
+   
+}
+
+.logoIcon img{
+    height: 80px;
+    width: auto;
+    margin-right: 4%;
+}
+
+.logoIcon{
+    flex: 1;
+}
+
+.headerLinks a{
+    color: white;
+    text-decoration: none;
+}
+
+.headerLinks ul li{
+    list-style-type: none;
+}
