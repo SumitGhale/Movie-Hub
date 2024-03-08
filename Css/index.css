@@ -5,12 +5,13 @@
 }
 
 .frontScreen{
-    height: 110vh;
+    height: 130vh;
     width: 100%;
     display: flex;
     background-color: rgb(59, 59, 102);
     align-items: center;
     gap: 3%;
+    /* align-items: end; */
 }
 
 .frontScreenLeft{
@@ -42,4 +43,122 @@
 .rightScreen3{
     height: 30vh;
     background-color: purple;
+}
+
+.titleText1{
+    font-size: 40px;
+    text-align: center;
+    margin-top: 5%;
+    position: relative;
+}
+.titleText1::after{
+    content: "";
+    position: absolute;
+    display: block;
+    left: 43%;
+    bottom: -14px;
+    width: 15%;
+    height: 3px;
+    background-color: black;
+}
+
+.releaseCategories{
+    display: flex;
+    margin-top: 5%;
+    gap: 10%;
+    margin-left: 30%;
+}
+.category{
+    font-size: 20px;
+    border: 5px solid red;
+    color: white;
+    background-color: red;
+    padding: 9px;
+    border-radius: 5%;
+}
+
+.movieCard{
+    height: 240px;
+    width: 280px;
+    background-color: black;
+}
+
+.galleryTop{
+    margin-top: 5%;
+    display: flex;
+    gap: 3%;
+    justify-content: center;
+}
+
+.galleryBottom{
+    margin-top: 10%;
+    display: flex;
+    gap: 3%;
+    justify-content: center;
+}
+
+.cardImage{
+    height: 240px;
+    width: 280px;
+}
+
+.cardBottom{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.cardBottom p {
+    padding: 2px 16px;
+}
+
+.stars{
+    padding: 2px 16px;
+}
+.stars i{
+    color: gold;
+}
+
+.movieTitle{
+    font-size: 20px;
+}
+
+.upcomingPoster{
+    margin-top: 11%;
+    background-color: black;
+}
+
+.upcomingPosterImage img{
+    height: 300px;
+    width: 500px;
+
+}
+
+.upcomingPosterImage {
+   margin-top: 7%;
+   display: flex;
+   gap: 5%;
+   margin-left: 3%;
+
+}
+
+.titleText2{
+    font-size: 40px;
+    text-align: center;
+    padding-top: 6%;
+    position: relative;
+    color: white;
+}
+.titleText2::after{
+    content: "";
+    position: absolute;
+    display: block;
+    left: 43%;
+    bottom: -14px;
+    width: 15%;
+    height: 3px;
+    background-color: white;
+
+}
+
+.upcomingPosterDesc{
+    color: white;
 }
