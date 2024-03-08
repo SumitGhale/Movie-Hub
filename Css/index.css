@@ -21,7 +21,7 @@
 }
 
 .frontScreenRight{
-    background-color: yellowgreen;
+    /* background-color: yellowgreen; */
     height: 90vh;
     flex: 1;
     display: flex;
@@ -135,7 +135,7 @@
 .upcomingPosterImage {
    margin-top: 7%;
    display: flex;
-   gap: 5%;
+   gap: 3%;
    margin-left: 3%;
 
 }
@@ -147,6 +147,7 @@
     position: relative;
     color: white;
 }
+
 .titleText2::after{
     content: "";
     position: absolute;
@@ -155,10 +156,76 @@
     bottom: -14px;
     width: 15%;
     height: 3px;
-    background-color: white;
-
+    background-color: red;
 }
 
 .upcomingPosterDesc{
     color: white;
+    text-align: justify;
+}
+
+.upcomingBtn1{
+    font-size: 15px;
+    border: 5px solid #534d4d;
+    color: white;
+    background-color: #534d4d;
+    padding: 9px;
+}
+
+.upcomingBtn2{
+    font-size: 15px;
+    border: 5px solid red;
+    color: white;
+    background-color: red;
+    padding: 9px;
+}
+
+.upcomingButtons{
+    display: flex;
+    gap: 10%;
+    margin-left: 5%;
+    margin-top: 4%;
+}
+
+.playIcon i{
+    padding-right: 8px;
+}
+
+.addIcon{
+    padding-right: 8px;
+}
+
+.titleText3{
+    font-size: 40px;
+    text-align: center;
+    padding-top: 6%;
+    position: relative;
+    color: black;
+}
+
+.titleText3::after{
+    content: "";
+    position: absolute;
+    display: block;
+    left: 43%;
+    bottom: -14px;
+    width: 15%;
+    height: 3px;
+    background-color: black;
+}
+
+.contactUsPoster{
+    margin-top: 5%;
+}
+
+.contactUsPoster img{
+    height: 400px;
+    width: 100%;
+    position: absolute;
+}
+
+.contactUsPoster h2, h3{
+    position: relative;
+    color: white;
+    /* left: 8%; */
 }

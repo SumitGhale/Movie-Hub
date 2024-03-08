@@ -37,3 +37,30 @@
 .headerLinks ul li{
     list-style-type: none;
 }
+
+.footer{
+    background-color: black;
+}
+.footerLogo img{
+    height: 80px;
+    width: auto;
+    margin-left: 46%;
+}
+
+.footerIcons i{
+    color: white;
+}
+
+.footerIcons {
+    display: flex;
+    gap: 2%;
+    justify-content: center;
+    margin-top: 2%;
+}
+
+.footerText{
+    color: white;
+    justify-content: center;
+    display: flex;
+    margin-top: 2%;
+}
