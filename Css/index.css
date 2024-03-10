@@ -216,16 +216,27 @@
 
 .contactUsPoster{
     margin-top: 5%;
+    height: 70vh;
+    width: 100%; 
+    margin-bottom: 5%;
+    position: relative;
 }
 
 .contactUsPoster img{
-    height: 400px;
+    height: 100%;
     width: 100%;
-    position: absolute;
+    position: absolute; 
+    top: 0;
+    left: 0;
+    z-index: -1;
 }
 
-.contactUsPoster h2, h3{
-    position: relative;
+.contactUsPoster h1, h2, h3{
     color: white;
-    /* left: 8%; */
+
+}
+
+.contactUsPoster h1{
+    padding-top: 5%;
+
 }

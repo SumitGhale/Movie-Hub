@@ -1,15 +1,21 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Hub</title>
-    <iframe src="/Htmls/header.html" width="100%" height="100px" frameborder="0"></iframe>
-    <link rel="stylesheet" href="/Css/header.css">
-    <link rel="stylesheet" href="/Css/index.css">
+    <link rel="stylesheet" href="../Css/header.css">
+    <link rel="stylesheet" href="../Css/index.css">
+    <link rel="stylesheet" href="../Css/footer.css">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <?php include 'header.php';?>
 </head>
 <body>
+
+
 
     <div class="frontScreen">
         <div class="frontScreenLeft">
@@ -37,7 +43,7 @@
       <div class="galleryTop">
 
         <div class="movieCard">
-          <img src="/images/AAAAQWy1Ztr7bu63kpC5aR92wz-sLyOKFBKTWZw-vH8og-6JO7DjirFHxtfdusGClygeI16QHLXf2P6k2us4kuL1KZ1t9RR_oOahXCkdZ_7WSHqdt0i4S6dqqt-ThaJzVMlAW3xgqpzkoEWvM4tSHb0rbfRc4C0.jpg"  class="cardImage">
+          <img src="../images/posterone.jpg"  class="cardImage">
           <div class="cardBottom">
             <p class="movieTitle">Money Heist</p>
             <p class="movieYearGenre">2018, Action</p>
@@ -53,7 +59,7 @@
         </div>
         
         <div class="movieCard">
-          <img src="/images/AAAAQWy1Ztr7bu63kpC5aR92wz-sLyOKFBKTWZw-vH8og-6JO7DjirFHxtfdusGClygeI16QHLXf2P6k2us4kuL1KZ1t9RR_oOahXCkdZ_7WSHqdt0i4S6dqqt-ThaJzVMlAW3xgqpzkoEWvM4tSHb0rbfRc4C0.jpg"  class="cardImage">
+          <img src="../images/posterone.jpg"  class="cardImage">
           <div class="cardBottom">
             <p class="movieTitle">Money Heist</p>
             <p class="movieYearGenre">2018, Action</p>
@@ -68,7 +74,7 @@
         </div>
 
         <div class="movieCard">
-          <img src="/images/AAAAQWy1Ztr7bu63kpC5aR92wz-sLyOKFBKTWZw-vH8og-6JO7DjirFHxtfdusGClygeI16QHLXf2P6k2us4kuL1KZ1t9RR_oOahXCkdZ_7WSHqdt0i4S6dqqt-ThaJzVMlAW3xgqpzkoEWvM4tSHb0rbfRc4C0.jpg"  class="cardImage">
+          <img src="../images/posterone.jpg"  class="cardImage">
           <div class="cardBottom">
             <p class="movieTitle">Money Heist</p>
             <p class="movieYearGenre">2018, Action</p>
@@ -83,7 +89,7 @@
         </div>
 
         <div class="movieCard">
-          <img src="/images/AAAAQWy1Ztr7bu63kpC5aR92wz-sLyOKFBKTWZw-vH8og-6JO7DjirFHxtfdusGClygeI16QHLXf2P6k2us4kuL1KZ1t9RR_oOahXCkdZ_7WSHqdt0i4S6dqqt-ThaJzVMlAW3xgqpzkoEWvM4tSHb0rbfRc4C0.jpg"  class="cardImage">
+          <img src="../images/posterone.jpg"  class="cardImage">
           <div class="cardBottom">
             <p class="movieTitle">Money Heist</p>
             <p class="movieYearGenre">2018, Action</p>
@@ -102,7 +108,7 @@
       <div class="galleryBottom">
 
         <div class="movieCard"> 
-          <img src="/images/AAAAQWy1Ztr7bu63kpC5aR92wz-sLyOKFBKTWZw-vH8og-6JO7DjirFHxtfdusGClygeI16QHLXf2P6k2us4kuL1KZ1t9RR_oOahXCkdZ_7WSHqdt0i4S6dqqt-ThaJzVMlAW3xgqpzkoEWvM4tSHb0rbfRc4C0.jpg"  class="cardImage">
+          <img src="../images/posterone.jpg"  class="cardImage">
           <div class="cardBottom">
             <p class="movieTitle">Money Heist</p>
             <p class="movieYearGenre">2018, Action</p>
@@ -117,7 +123,7 @@
         </div>
 
         <div class="movieCard">
-          <img src="/images/AAAAQWy1Ztr7bu63kpC5aR92wz-sLyOKFBKTWZw-vH8og-6JO7DjirFHxtfdusGClygeI16QHLXf2P6k2us4kuL1KZ1t9RR_oOahXCkdZ_7WSHqdt0i4S6dqqt-ThaJzVMlAW3xgqpzkoEWvM4tSHb0rbfRc4C0.jpg"  class="cardImage">
+          <img src="../images/posterone.jpg"  class="cardImage">
           <div class="cardBottom">
             <p class="movieTitle">Money Heist</p>
             <p class="movieYearGenre">2018, Action</p>
@@ -132,7 +138,7 @@
         </div>
 
         <div class="movieCard">
-          <img src="/images/AAAAQWy1Ztr7bu63kpC5aR92wz-sLyOKFBKTWZw-vH8og-6JO7DjirFHxtfdusGClygeI16QHLXf2P6k2us4kuL1KZ1t9RR_oOahXCkdZ_7WSHqdt0i4S6dqqt-ThaJzVMlAW3xgqpzkoEWvM4tSHb0rbfRc4C0.jpg"  class="cardImage">
+          <img src="../images/posterone.jpg"  class="cardImage">
           <div class="cardBottom">
             <p class="movieTitle">Money Heist</p>
             <p class="movieYearGenre">2018, Action</p>
@@ -147,7 +153,7 @@
         </div>
 
         <div class="movieCard">
-          <img src="/images/AAAAQWy1Ztr7bu63kpC5aR92wz-sLyOKFBKTWZw-vH8og-6JO7DjirFHxtfdusGClygeI16QHLXf2P6k2us4kuL1KZ1t9RR_oOahXCkdZ_7WSHqdt0i4S6dqqt-ThaJzVMlAW3xgqpzkoEWvM4tSHb0rbfRc4C0.jpg"  class="cardImage">
+          <img src="../images/posterone.jpg"  class="cardImage">
           <div class="cardBottom">
             <p class="movieTitle">Money Heist</p>
             <p class="movieYearGenre">2018, Action</p>
@@ -167,7 +173,7 @@
         <p class="titleText2">Highly awaited</p>
 
         <div class="upcomingPosterImage">
-          <img src="/images/AAAAQWy1Ztr7bu63kpC5aR92wz-sLyOKFBKTWZw-vH8og-6JO7DjirFHxtfdusGClygeI16QHLXf2P6k2us4kuL1KZ1t9RR_oOahXCkdZ_7WSHqdt0i4S6dqqt-ThaJzVMlAW3xgqpzkoEWvM4tSHb0rbfRc4C0.jpg" alt="">
+          <img src="../images/posterone.jpg" alt="">
 
           <p class="upcomingPosterDesc">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Placeat maiores magni fugit quas soluta qui aliquam explicabo laborum delectus vero vel modi odit, veniam quisquam, laboriosam quod iusto at ex!
@@ -191,11 +197,15 @@
       <p class="titleText3">Contact Us</p>
 
       <div class="contactUsPoster">
-        <img src="/images/AAAAQWy1Ztr7bu63kpC5aR92wz-sLyOKFBKTWZw-vH8og-6JO7DjirFHxtfdusGClygeI16QHLXf2P6k2us4kuL1KZ1t9RR_oOahXCkdZ_7WSHqdt0i4S6dqqt-ThaJzVMlAW3xgqpzkoEWvM4tSHb0rbfRc4C0.jpg" alt="Contact Us Poster">
-        <h2>Any Queries or Suggestions?</h2>
-        <h3>Feel free to email us at : </h3>
-        <h2>Urreviewmatters91@gmail.com</h2>
+        <img src="../images/posterone.jpg" alt="Contact Us Poster">
+        <h1>Any Queries or Suggestions?</h1>
+        <h2>Feel free to email us at : </h2>
+        <h3>Urreviewmatters91@gmail.com</h3>
       </div>
+
+      <?php include 'footer.php';?>
+
 
 </body>
 </html>
+
