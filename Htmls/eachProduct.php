@@ -1,3 +1,6 @@
+<!-- add quesionmark  -->
+<?php include 'header.php' ?>
+
 <!doctype html>
 <html lang="en">
 
@@ -15,7 +18,7 @@
 
     <!-- movie poster and description -->
     <div class="coverphoto">
-      <img class="stImage" src="../images/AAAAQWy1Ztr7bu63kpC5aR92wz-sLyOKFBKTWZw-vH8og-6JO7DjirFHxtfdusGClygeI16QHLXf2P6k2us4kuL1KZ1t9RR_oOahXCkdZ_7WSHqdt0i4S6dqqt-ThaJzVMlAW3xgqpzkoEWvM4tSHb0rbfRc4C0.jpg" alt="image">
+      <img class="stImage" src="../images//posterone.jpg" alt="image">
     </div>
 
     <div class="descriptionContainer">
@@ -195,8 +198,10 @@
         <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
       </div>
     </div>
-    <button type="button" class="btn btn-primary d-block m-auto">Leave your review...</button>
+    <button type="button" class="btn btn-primary d-block m-auto my-2">Leave your review...</button>
   </div>
+
+<?php include 'footer.php' ?>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

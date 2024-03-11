@@ -1,5 +1,7 @@
        <!-- Footer -->
 
+<link rel="stylesheet" href="../Css/footer.css">
+
    <div class="footer">
     <div class="footerLogo"><img src="../images/logo.png" alt="Logo"></div>
     <div class="footerIcons">
