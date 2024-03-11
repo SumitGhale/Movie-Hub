@@ -1,0 +1,242 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.frontScreen{
+    height: 130vh;
+    width: 100%;
+    display: flex;
+    background-color: rgb(59, 59, 102);
+    align-items: center;
+    gap: 3%;
+    /* align-items: end; */
+}
+
+.frontScreenLeft{
+    height: 100vh;
+    background-color: red;
+    flex: 2;
+}
+
+.frontScreenRight{
+    /* background-color: yellowgreen; */
+    height: 90vh;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3%;
+    margin-right: 2%;
+}
+
+.rightScreen1{
+    height: 30vh;
+    background-color: black;
+}
+
+.rightScreen2{
+    height: 30vh;
+    background-color: yellow;
+}
+
+.rightScreen3{
+    height: 30vh;
+    background-color: purple;
+}
+
+.titleText1{
+    font-size: 40px;
+    text-align: center;
+    margin-top: 5%;
+    position: relative;
+}
+.titleText1::after{
+    content: "";
+    position: absolute;
+    display: block;
+    left: 43%;
+    bottom: -14px;
+    width: 15%;
+    height: 3px;
+    background-color: black;
+}
+
+.releaseCategories{
+    display: flex;
+    margin-top: 5%;
+    gap: 10%;
+    margin-left: 30%;
+}
+.category{
+    font-size: 20px;
+    border: 5px solid red;
+    color: white;
+    background-color: red;
+    padding: 9px;
+    border-radius: 5%;
+}
+
+.movieCard{
+    height: 240px;
+    width: 280px;
+    background-color: black;
+}
+
+.galleryTop{
+    margin-top: 5%;
+    display: flex;
+    gap: 3%;
+    justify-content: center;
+}
+
+.galleryBottom{
+    margin-top: 10%;
+    display: flex;
+    gap: 3%;
+    justify-content: center;
+}
+
+.cardImage{
+    height: 240px;
+    width: 280px;
+}
+
+.cardBottom{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.cardBottom p {
+    padding: 2px 16px;
+}
+
+.stars{
+    padding: 2px 16px;
+}
+.stars i{
+    color: gold;
+}
+
+.movieTitle{
+    font-size: 20px;
+}
+
+.upcomingPoster{
+    margin-top: 11%;
+    background-color: black;
+}
+
+.upcomingPosterImage img{
+    height: 300px;
+    width: 500px;
+
+}
+
+.upcomingPosterImage {
+   margin-top: 7%;
+   display: flex;
+   gap: 3%;
+   margin-left: 3%;
+
+}
+
+.titleText2{
+    font-size: 40px;
+    text-align: center;
+    padding-top: 6%;
+    position: relative;
+    color: white;
+}
+
+.titleText2::after{
+    content: "";
+    position: absolute;
+    display: block;
+    left: 43%;
+    bottom: -14px;
+    width: 15%;
+    height: 3px;
+    background-color: red;
+}
+
+.upcomingPosterDesc{
+    color: white;
+    text-align: justify;
+}
+
+.upcomingBtn1{
+    font-size: 15px;
+    border: 5px solid #534d4d;
+    color: white;
+    background-color: #534d4d;
+    padding: 9px;
+}
+
+.upcomingBtn2{
+    font-size: 15px;
+    border: 5px solid red;
+    color: white;
+    background-color: red;
+    padding: 9px;
+}
+
+.upcomingButtons{
+    display: flex;
+    gap: 10%;
+    margin-left: 5%;
+    margin-top: 4%;
+}
+
+.playIcon i{
+    padding-right: 8px;
+}
+
+.addIcon{
+    padding-right: 8px;
+}
+
+.titleText3{
+    font-size: 40px;
+    text-align: center;
+    padding-top: 6%;
+    position: relative;
+    color: black;
+}
+
+.titleText3::after{
+    content: "";
+    position: absolute;
+    display: block;
+    left: 43%;
+    bottom: -14px;
+    width: 15%;
+    height: 3px;
+    background-color: black;
+}
+
+.contactUsPoster{
+    margin-top: 5%;
+    height: 70vh;
+    width: 100%; 
+    margin-bottom: 5%;
+    position: relative;
+}
+
+.contactUsPoster img{
+    height: 100%;
+    width: 100%;
+    position: absolute; 
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.contactUsPoster h1, h2, h3{
+    color: white;
+
+}
+
+.contactUsPoster h1{
+    padding-top: 5%;
+
+}
