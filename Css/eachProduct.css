@@ -1,6 +1,161 @@
-.coverphoto{
-    height: 50vh;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #EBECF0;
+}
+
+/* movie poster and description */
+.poster_and_description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.coverphoto {
     width: 100vw;
-    /* background-image: url(); */
-    /* background-color: tomato; */
+}
+
+.stImage {
+    width: 100vw;
+    object-fit: cover;
+    height: 75vh;
+}
+
+.descriptionContainer {
+    /* background-color: white; */
+    top: 20rem;
+    width: 100vw;
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    margin-top: -8rem;
+}
+
+.leftSection {
+    /* background-color: white; */
+    margin-right: 2rem;
+    /* border: 2px solid black; */
+}
+
+.filmDescription {
+    background-color: white;
+    height: 12rem;
+    width: 65vw;
+    /* border: 2px solid black; */
+    margin-bottom: 1rem;
+}
+
+.aboveLine {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title {
+    margin: 1rem 1rem 0 1rem;
+}
+
+.amount {
+    background-color: #36B9CC;
+    padding: 4px 10px;
+    border-radius: 4px;
+    color: white;
+}
+
+.bellowLine {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.detailedInfo {
+    height: 35rem;
+    width: 65vw;
+    background-color: white;
+    /* border: 2px solid black; */
+    padding: 1rem;
+}
+
+.summary_label {
+    color: #BB2D3B;
+    font-weight: bold;
+    /* margin: 1rem; */
+}
+
+/* right section */
+.rightSection {
+    /* border: 2px solid black; */
+    padding: 1rem;
+    border-radius: 8px;
+    max-width: 20rem;
+    background: white;
+}
+
+.miniPoster {
+    height: 25rem;
+    width: 18rem;
+    border-radius: 8px;
+    object-fit: cover;
+    /* margin: 2rem; */
+}
+
+/* actors */
+.underline_effect {
+    position: relative;
+    display: inline-block;
+}
+
+.underline_effect::after{
+    content: "";
+    position: absolute;
+    left: 15%;
+    bottom: -5px;
+    border: 2px solid #183446;
+    width: 75%;
+}
+.actors {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.5rem 5rem;
+}
+
+.card img {
+    height: 25rem;
+    object-fit: cover;
+}
+
+/* trailer */
+.trailer {
+    width: 90vw;
+    height: 35rem;
+    margin: auto;
+}
+
+/* review */
+.reviews {
+    width: 100%;
+}
+
+.review {
+    margin: 1rem 4rem;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+}
+
+.user {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 90%;
+}
+
+.publish_date {
+    margin-top: 0;
 }
