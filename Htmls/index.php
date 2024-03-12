@@ -19,14 +19,14 @@
 
     <div class="frontScreen">
         <div class="frontScreenLeft">
-  
+          <img src="../images/posterone.jpg" alt="poster one">
         </div>
   
         <div class="frontScreenRight">
   
-          <div class="rightScreen1"></div>
-          <div class="rightScreen2"></div>
-          <div class="rightScreen3"></div>
+          <div class="rightScreen1"><img src="../images/avengers.jpg" alt="rightposter1"></div>
+          <div class="rightScreen2"><img src="../images/dune.png" alt="rightposter2"></div>
+          <div class="rightScreen3"><img src="../images/oppenheimer.jpg" alt="rightposter3"></div>
   
         </div>
       </div>
@@ -34,19 +34,19 @@
       <p class="titleText1">Know more from our reviews</p>
 
       <div class="releaseCategories">
-        <button class="category">Top rated</button>
-        <button class="category">Just released</button>
-        <button class="category">Upcoming</button>
+        <button class="categoryBtn">Top rated</button>
+        <button class="categoryBtn">Just released</button>
+        <button class="categoryBtn">Upcoming</button>
        
       </div>
 
       <div class="galleryTop">
 
         <div class="movieCard">
-          <img src="../images/posterone.jpg"  class="cardImage">
+          <img src="../images/conjuring.jpg"  class="cardImage">
           <div class="cardBottom">
-            <p class="movieTitle">Money Heist</p>
-            <p class="movieYearGenre">2018, Action</p>
+            <p class="movieTitle">The Conjuring</p>
+            <p class="movieYearGenre">2018, Horror</p>
             <div class="stars">
               <i class="fa-solid fa-star"></i>
               <i class="fa-solid fa-star"></i>
@@ -59,9 +59,9 @@
         </div>
         
         <div class="movieCard">
-          <img src="../images/posterone.jpg"  class="cardImage">
+          <img src="../images/madagascar.jpg"  class="cardImage">
           <div class="cardBottom">
-            <p class="movieTitle">Money Heist</p>
+            <p class="movieTitle">Madagascar</p>
             <p class="movieYearGenre">2018, Action</p>
             <div class="stars">
               <i class="fa-solid fa-star"></i>
@@ -74,9 +74,9 @@
         </div>
 
         <div class="movieCard">
-          <img src="../images/posterone.jpg"  class="cardImage">
+          <img src="../images/madameweb.jpeg"  class="cardImage">
           <div class="cardBottom">
-            <p class="movieTitle">Money Heist</p>
+            <p class="movieTitle">Madame Web</p>
             <p class="movieYearGenre">2018, Action</p>
             <div class="stars">
               <i class="fa-solid fa-star"></i>
@@ -89,9 +89,9 @@
         </div>
 
         <div class="movieCard">
-          <img src="../images/posterone.jpg"  class="cardImage">
+          <img src="../images/pussinboots.jpg"  class="cardImage">
           <div class="cardBottom">
-            <p class="movieTitle">Money Heist</p>
+            <p class="movieTitle">Puss in Boots</p>
             <p class="movieYearGenre">2018, Action</p>
             <div class="stars">
               <i class="fa-solid fa-star"></i>
@@ -108,9 +108,9 @@
       <div class="galleryBottom">
 
         <div class="movieCard"> 
-          <img src="../images/posterone.jpg"  class="cardImage">
+          <img src="../images/fastandfurious.jpg"  class="cardImage">
           <div class="cardBottom">
-            <p class="movieTitle">Money Heist</p>
+            <p class="movieTitle">Fast and Furious</p>
             <p class="movieYearGenre">2018, Action</p>
             <div class="stars">
               <i class="fa-solid fa-star"></i>
@@ -123,9 +123,9 @@
         </div>
 
         <div class="movieCard">
-          <img src="../images/posterone.jpg"  class="cardImage">
+          <img src="../images/transformers.jpg"  class="cardImage">
           <div class="cardBottom">
-            <p class="movieTitle">Money Heist</p>
+            <p class="movieTitle">Transformers</p>
             <p class="movieYearGenre">2018, Action</p>
             <div class="stars">
               <i class="fa-solid fa-star"></i>
@@ -138,9 +138,9 @@
         </div>
 
         <div class="movieCard">
-          <img src="../images/posterone.jpg"  class="cardImage">
+          <img src="../images/vamprie.jpg"  class="cardImage">
           <div class="cardBottom">
-            <p class="movieTitle">Money Heist</p>
+            <p class="movieTitle">The Vampire Diaries</p>
             <p class="movieYearGenre">2018, Action</p>
             <div class="stars">
               <i class="fa-solid fa-star"></i>
@@ -153,9 +153,9 @@
         </div>
 
         <div class="movieCard">
-          <img src="../images/posterone.jpg"  class="cardImage">
+          <img src="../images/dune.png"  class="cardImage">
           <div class="cardBottom">
-            <p class="movieTitle">Money Heist</p>
+            <p class="movieTitle">Dune</p>
             <p class="movieYearGenre">2018, Action</p>
             <div class="stars">
               <i class="fa-solid fa-star"></i>
@@ -173,11 +173,11 @@
         <p class="titleText2">Highly awaited</p>
 
         <div class="upcomingPosterImage">
-          <img src="../images/posterone.jpg" alt="">
+          <img src="../images/superman.jpg" alt="posterImage">
 
           <p class="upcomingPosterDesc">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Placeat maiores magni fugit quas soluta qui aliquam explicabo laborum delectus vero vel modi odit, veniam quisquam, laboriosam quod iusto at ex!
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maxime iste, enim dignissimos, perspiciatis laboriosam vel deleniti architecto dolor voluptates dolores at maiores itaque nostrum officia id vitae soluta quidem, doloremque quisquam quod! Doloribus officia ab facilis odio libero commodi doloremque nostrum qui beatae!
+            <p class="upcomingTitle">Batman vs Superman</p><br>
+            <p class="upcomingMiniDesc">2 hr 31 mins</p>
           </p>
           
         </div>
@@ -197,7 +197,7 @@
       <p class="titleText3">Contact Us</p>
 
       <div class="contactUsPoster">
-        <img src="../images/posterone.jpg" alt="Contact Us Poster">
+        <img src="../images/drstrange.png" alt="Contact Us Poster">
         <h1>Any Queries or Suggestions?</h1>
         <h2>Feel free to email us at : </h2>
         <h3>Urreviewmatters91@gmail.com</h3>

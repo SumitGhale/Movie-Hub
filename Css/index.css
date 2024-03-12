@@ -8,20 +8,25 @@
     height: 130vh;
     width: 100%;
     display: flex;
-    background-color: rgb(59, 59, 102);
+    background-color: rgb(46, 46, 101);
     align-items: center;
     gap: 3%;
-    /* align-items: end; */
 }
 
 .frontScreenLeft{
     height: 100vh;
-    background-color: red;
     flex: 2;
+    margin-left: 3%;
 }
 
+.frontScreenLeft img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+
 .frontScreenRight{
-    /* background-color: yellowgreen; */
     height: 90vh;
     flex: 1;
     display: flex;
@@ -32,17 +37,32 @@
 
 .rightScreen1{
     height: 30vh;
-    background-color: black;
+}
+
+.rightScreen1 img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 }
 
 .rightScreen2{
     height: 30vh;
-    background-color: yellow;
+}
+
+.rightScreen2 img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 }
 
 .rightScreen3{
     height: 30vh;
-    background-color: purple;
+}
+
+.rightScreen3 img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 }
 
 .titleText1{
@@ -66,15 +86,20 @@
     display: flex;
     margin-top: 5%;
     gap: 10%;
-    margin-left: 30%;
+    margin-left: 28%;
 }
-.category{
+.categoryBtn{
     font-size: 20px;
-    border: 5px solid red;
+    border: 3px solid red;
+    color: red;
+    background-color: white;
+    padding: 9px 13px;
+    border-radius: 5%;
+}
+
+.categoryBtn:hover{
     color: white;
     background-color: red;
-    padding: 9px;
-    border-radius: 5%;
 }
 
 .movieCard{
@@ -100,6 +125,8 @@
 .cardImage{
     height: 240px;
     width: 280px;
+    object-fit: cover;
+
 }
 
 .cardBottom{
@@ -129,6 +156,7 @@
 .upcomingPosterImage img{
     height: 300px;
     width: 500px;
+    object-fit: cover;
 
 }
 
@@ -162,29 +190,55 @@
 .upcomingPosterDesc{
     color: white;
     text-align: justify;
+    margin-right: 4%;
 }
 
 .upcomingBtn1{
-    font-size: 15px;
-    border: 5px solid #534d4d;
+    font-size: 19px;
+    border: 2px solid black;
+    color: black;
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 5%;
+    border-radius: 5%;
+}
+
+.upcomingBtn1:hover{
     color: white;
     background-color: #534d4d;
-    padding: 9px;
 }
 
 .upcomingBtn2{
-    font-size: 15px;
-    border: 5px solid red;
+    font-size: 19px;
+    border: 2px solid red;
     color: white;
-    background-color: red;
+    background-color: black;
     padding: 9px;
+    margin-bottom: 5%;
+    border-radius: 5%;
+}
+
+.upcomingBtn2:hover{
+    background-color: red;
+    color: white;
 }
 
 .upcomingButtons{
     display: flex;
-    gap: 10%;
-    margin-left: 5%;
+    gap: 5%;
+    margin-left: 3.5%;
     margin-top: 4%;
+}
+
+.upcomingTitle{
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.upcomingMiniDesc{
+    color: white;
+    font-size: 15px;
 }
 
 .playIcon i{
@@ -216,7 +270,7 @@
 
 .contactUsPoster{
     margin-top: 5%;
-    height: 70vh;
+    height: 90vh;
     width: 100%; 
     margin-bottom: 5%;
     position: relative;
@@ -229,14 +283,18 @@
     top: 0;
     left: 0;
     z-index: -1;
+    object-fit: cover;
 }
 
 .contactUsPoster h1, h2, h3{
     color: white;
+    padding-left: 4%;
 
 }
 
 .contactUsPoster h1{
-    padding-top: 5%;
+  
+    padding-top: 18%;
+    padding-left: 4%;
 
 }
