@@ -10,7 +10,7 @@ body {
 
 #user_image_rectangle{
     padding: 0.5rem 1.5rem;
-    border: 2px black solid;
+    /* border: 2px black solid; */
     margin: 0.5rem 0;
     display: flex;
     justify-content: space-between;
@@ -38,8 +38,30 @@ body {
     padding: 1rem;
 }
 
-#user_details{
-    height: 21rem;
-    width: 79vw;
+.section{
+    /* height: 21rem; */
+    padding: 1rem;
+    width: 70vw;
     background-color: #fff;
+    margin-bottom: 1.5rem;
+}
+
+#profile{
+    /* display: none; */
+}
+
+#watchlists{
+    display: none;
+}
+
+#your_lists{
+    display: none;
+}
+
+#account_settings{
+    display: none;
+}
+
+#logout{
+    display: none;
 }
