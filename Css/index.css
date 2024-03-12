@@ -189,8 +189,21 @@
 
 .upcomingPosterDesc{
     color: white;
-    text-align: justify;
     margin-right: 4%;
+}
+
+.upcomingMainDesc p{
+    text-align: justify;
+    margin-top: 4%;
+    line-height: 25px;
+}
+
+.boldText{
+    font-weight: bold;
+}
+
+.upcomingCasting p{
+    padding: 2% 0;
 }
 
 .upcomingBtn1{
@@ -230,15 +243,22 @@
     margin-top: 4%;
 }
 
-.upcomingTitle{
+.upcomingTitle p{
     color: white;
     font-size: 28px;
     font-weight: bold;
 }
 
 .upcomingMiniDesc{
-    color: white;
-    font-size: 15px;
+    margin-top: 3%;
+    display: flex;
+    gap: 2%;
+}
+
+.upcomingMiniDesc2{
+    border-left: 3px solid white;
+    border-right: 3px solid white;
+    padding: 0 11px;
 }
 
 .playIcon i{
