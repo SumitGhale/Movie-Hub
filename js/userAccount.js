@@ -18,7 +18,7 @@ profile_btn.addEventListener(('click'), () => {
     console.log("profile butotn was clicked");
     reset();
     profile_btn.classList.add('active');
-    profile_btn.classList.remove('link-body-emphasis');   
+    profile_btn.classList.remove('link-body-emphasis');
     profile.style.display = 'block';
 })
 
@@ -67,3 +67,16 @@ function reset() {
     });
 
 }
+
+// const myModal = document.querySelector('.myModal')
+// const confirm_logout = document.querySelector('.confirm_logout')
+// const close_modal = document.querySelector('.close_modal')
+
+// myModal.addEventListener('click', () => {
+//     console.log("i am here");
+//     confirm_logout.showModal();
+// })
+
+// close_modal.addEventListener('click', () => {
+//     confirm_logout.close();
+// })

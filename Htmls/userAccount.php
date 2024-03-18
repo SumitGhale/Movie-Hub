@@ -54,7 +54,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" id="logout_btn" class="nav-link link-body-emphasis side_btns">
+                    <a href="#" id="logout_btn" class="nav-link link-body-emphasis side_btns myModal" data-bs-toggle="modal" data-bs-target="#reg-modal">
                         Logout
                     </a>
                 </li>
@@ -150,17 +150,125 @@
 
             <!-- watchlists -->
             <div class="section" id="watchlists">
-                <div class="movieCard">
-                    <img src="../images/pussinboots.jpg" class="cardImage">
-                    <div class="cardBottom">
-                        <p class="movieTitle">Puss in Boots</p>
-                        <p class="movieYearGenre">2018, Action</p>
-                        <div class="stars">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
+                <div class="movies">
+                    <div class="movieCard">
+                        <img src="../images/pussinboots.jpg" class="cardImage">
+                        <div class="cardBottom">
+                            <p class="movieTitle">Puss in Boots</p>
+                            <p class="movieYearGenre">2018, Action</p>
+                            <div class="stars">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="movieCard">
+                        <img src="../images/conjuring.jpg" class="cardImage">
+                        <div class="cardBottom">
+                            <p class="movieTitle">The Conjuring</p>
+                            <p class="movieYearGenre">2018, Horror</p>
+                            <div class="stars">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="movieCard">
+                        <img src="../images/madagascar.jpg" class="cardImage">
+                        <div class="cardBottom">
+                            <p class="movieTitle">Madagascar</p>
+                            <p class="movieYearGenre">2018, Action</p>
+                            <div class="stars">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="movieCard">
+                        <img src="../images/madameweb.jpeg" class="cardImage">
+                        <div class="cardBottom">
+                            <p class="movieTitle">Madame Web</p>
+                            <p class="movieYearGenre">2018, Action</p>
+                            <div class="stars">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="movieCard">
+                        <img src="../images/fastandfurious.jpg" class="cardImage">
+                        <div class="cardBottom">
+                            <p class="movieTitle">Fast and Furious</p>
+                            <p class="movieYearGenre">2018, Action</p>
+                            <div class="stars">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="movieCard">
+                        <img src="../images/transformers.jpg" class="cardImage">
+                        <div class="cardBottom">
+                            <p class="movieTitle">Transformers</p>
+                            <p class="movieYearGenre">2018, Action</p>
+                            <div class="stars">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="movieCard">
+                        <img src="../images/vamprie.jpg" class="cardImage">
+                        <div class="cardBottom">
+                            <p class="movieTitle">The Vampire Diaries</p>
+                            <p class="movieYearGenre">2018, Action</p>
+                            <div class="stars">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="movieCard">
+                        <img src="../images/dune.png" class="cardImage">
+                        <div class="cardBottom">
+                            <p class="movieTitle">Dune</p>
+                            <p class="movieYearGenre">2018, Action</p>
+                            <div class="stars">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -175,7 +283,23 @@
             </div>
 
             <div class="section" id="logout">
-                user logout
+                <div class="modal" id="reg-modal" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Logout ?</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Are you sure you want to logout?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Logout</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

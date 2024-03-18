@@ -57,32 +57,28 @@ body {
     justify-content: center;
 }
 
-.galleryBottom{
-    margin-top: 10%;
+.movies{
+    margin-top: 1.5rem;
     display: flex;
-    gap: 3%;
-    justify-content: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .movieCard{
-    height: 200px;
     width: 240px;
-    border: 5px black solid;
     margin-bottom: 15px;
-
 }
 
 .cardImage{
     height: 198px;
     width: 238px;
     object-fit: cover;
-
 }
 
 .cardBottom{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding-bottom: 1rem;
-    border: 5px black solid;
+    width: 238px;
 }
 
 .cardBottom p {
@@ -112,7 +108,16 @@ body {
     display: none;
 }
 
+.confirm_logout{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 #logout{
     display: none;
 }
+
+
 
