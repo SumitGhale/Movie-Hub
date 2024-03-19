@@ -18,16 +18,17 @@
     width: 50%;
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-direction: column-reverse;
-    gap: 12%;
+    /* justify-content: center; */
+    flex-direction: column;
+    gap: 5%;
+    margin-top: 5%;
 }
 
 .leftdiv img{
     height: 56vh;
     width: 69%;
     object-fit: cover;
-
+    margin-top: 10%;
 }
 
 .rightdiv{
@@ -76,4 +77,6 @@ h1, h3, .signuptxt, label{
     align-items: center;
     gap: 2%;
     margin-left: 20px;
+    margin-top: 2%;
 }
+

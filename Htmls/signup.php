@@ -17,8 +17,9 @@
 
     <div class="main">
         <div class="leftdiv">
+            <h1>Don't just watch it - Read It !</h1>
+            <h2>Get true & honest reviews at <span style="color:red"> Movies Hub </span></h2>
             <img src="../images/signupimage.png" alt="signup picture">
-            <h1>Welcome back ! </h1>
         </div>
 
         <div class="rightdiv">
