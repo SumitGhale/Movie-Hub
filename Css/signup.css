@@ -6,7 +6,7 @@
 
 .main{
     width: 96%;
-    height: 90vh;
+    height: 120vh;
     display: flex;
     margin: 4% 2%;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
@@ -20,26 +20,25 @@
     align-items: center;
     justify-content: center;
     flex-direction: column-reverse;
-    gap: 7%;
-    
+    gap: 12%;
 }
 
 .leftdiv img{
-    height: 51vh;
-    width: 65%;
+    height: 56vh;
+    width: 69%;
     object-fit: cover;
 
 }
 
 .rightdiv{
     margin-top: 2.5%;
-    height: 80vh;
+    height: 110vh;
     width: 50%;
     border-left: 1px solid rgba(0, 0, 0, .4)
 }
 
-input[type=email], input[type=password]{
-    width: 92%;
+input[type=text], input[type=email],input[type=password]{
+    width: 90%;
     padding: 12px 20px;
     margin: 8px 20px;
     display: inline-block;
@@ -47,15 +46,11 @@ input[type=email], input[type=password]{
 }
 
 
-.forgettxt{
-    text-align: end;
-    margin-right: 5%;
-}
 
-.submitbtn{
+.signupbtn{
     background-color: #ff725e;
     color: white;
-    width: 92%;
+    width: 90%;
     padding: 14px 20px;
     border: none;
     margin: 12px 20px;
@@ -71,7 +66,14 @@ h1, h3, .signuptxt, label{
     margin-top: 2%;
 }
 
-.signupLink a{
+.loginLink a{
     text-decoration: none;
     color: black;
+}
+
+.checkbox{
+    display: flex;
+    align-items: center;
+    gap: 2%;
+    margin-left: 20px;
 }
