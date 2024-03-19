@@ -22,7 +22,7 @@
         </div>
 
         <div class="rightdiv">
-            <h1>LOGIN</h1>
+            <h1>Login</h1>
             <h3>Enter your login details</h3>
 
             <form action="" method="post">
@@ -33,11 +33,11 @@
             <input type="email" placeholder="Enter your email" required>
 
             <label for="password">Password</label>
-            <input type="password" placeholder="Enter your password" required>
+            <input type="password"  placeholder= "Enter your password" required >
 
             <p class="forgettxt">Forget passoword ?</p>
             <button type="button" class="submitbtn">Login</button>
-            <p class="signuptxt">Don't have an account? <b>Sign in</b></p>
+            <p class="signuptxt">Don't have an account? <span class="signupLink"><b><a href="">Sign Up</a></b></span></p>
 
             </div>
 
