@@ -10,7 +10,6 @@ body {
 
 #user_image_rectangle{
     padding: 0.5rem 1.5rem;
-    border: 2px black solid;
     margin: 0.5rem 0;
     display: flex;
     justify-content: space-between;
@@ -38,8 +37,87 @@ body {
     padding: 1rem;
 }
 
-#user_details{
-    height: 21rem;
-    width: 79vw;
+.section{
+    /* height: 21rem; */
+    padding: 1rem;
+    width: 70vw;
     background-color: #fff;
+    margin-bottom: 1.5rem;
 }
+
+#profile{
+    /* display: none; */
+}
+
+/* watchlists */
+.galleryTop{
+    /* margin-top: 5%; */
+    display: flex;
+    gap: 3%;
+    justify-content: center;
+}
+
+.movies{
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.movieCard{
+    width: 240px;
+    margin-bottom: 15px;
+}
+
+.cardImage{
+    height: 198px;
+    width: 238px;
+    object-fit: cover;
+}
+
+.cardBottom{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding-bottom: 1rem;
+    width: 238px;
+}
+
+.cardBottom p {
+    padding: 2px 16px;
+}
+
+.stars{
+    padding: 2px 16px;
+}
+.stars i{
+    color: gold;
+}
+
+.movieTitle{
+    font-size: 20px;
+}
+
+#watchlists{
+    display: none;
+}
+
+#your_lists{
+    display: none;
+}
+
+#account_settings{
+    display: none;
+}
+
+.confirm_logout{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#logout{
+    display: none;
+}
+
+
+

@@ -1,0 +1,54 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #EBECF0;
+}
+
+.title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin: 1rem 0;
+}
+
+.title_line{
+    height: 5px;
+    width: 10rem;
+    background-color: black;
+    border-radius: 4px;
+}
+
+/* favourites list */
+
+.favourite{
+    display: flex;
+    justify-content: space-between;
+}
+
+.image_and_desc{
+    display: flex;
+    align-items: flex-end;
+    gap: 5rem;
+}
+
+.image_and_desc img{
+    width: 20rem;
+    height: 15rem;
+    object-fit: cover;
+}
+
+.likes_and_remove{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.delete:hover .fa-trash {
+    color: black;
+}
