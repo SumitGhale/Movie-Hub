@@ -22,7 +22,7 @@
                 <p>Johnkumar@gmail.com</p>
             </div>
         </div>
-        <button type="button" class="btn btn-primary">Logout</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reg-modal">Logout</button>
     </div>
 
     <!-- profile options -->
@@ -54,7 +54,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" id="logout_btn" class="nav-link link-body-emphasis side_btns myModal" data-bs-toggle="modal" data-bs-target="#reg-modal">
+                    <a href="#" id="logout_btn" class="nav-link link-body-emphasis side_btns" data-bs-toggle="modal" data-bs-target="#reg-modal">
                         Logout
                     </a>
                 </li>
@@ -282,8 +282,10 @@
                 user account_settings
             </div>
 
+            <!-- Logout -->
             <div class="section" id="logout">
-                <div class="modal" id="reg-modal" tabindex="-1">
+            </div>
+            <div class="modal" id="reg-modal" tabindex="-1">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -300,7 +302,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
     <?php include 'footer.php' ?>
