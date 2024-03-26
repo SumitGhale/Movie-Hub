@@ -1,55 +1,6 @@
 <?php
-
-if(isset($_POST["submit"])){
-    $first_name = $_POST["firstname"];
-    $last_name = $_POST["lastname"];
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-    $confirm_password = $_POST["confirm_password"];
-
-    $password_hash = password_hash($password, PASSWORD_DEFAULT);
-    $errors = array();
-
-    if(empty($firstname) OR empty($last_name) OR empty($email) OR empty($password) OR empty($confirm_password)){
-        array_push($errors, "All fields are required");
-    }
-
-    if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-        array_push ($errors, "Email is not valid");
-    }
-
-    if(strlen($password)<5){
-        array_push($errors, "Password must be atleast 5 characters long");
-    }
-
-    if($password !== $confirm_password){
-        array_push($errors, "Password does not match");
-    }
-
-    if(count($errors) >0){
-        foreach($errors as $error){
-            echo "<div class = 'alert-danger'> $error </div>";
-        }
-    }
-    else{
-        require_once "config.php";
-
-        $sql = "INSERT INTO users(first_name, last_name, email, password) VALUES ( ?, ?, ?, ? )";
-        $stmt = mysqli_stmt_init($conn);
-        $prepareStmt = mysqli_stmt_prepare($stmt, $sql);
-        if($prepareStmt){
-            mysqli_stmt_bind_param($stmt, "ssss", $first_name, $last_name, $email, $password_hash);
-            mysqli_stmt_execute($stmt);
-        }
-
-        else{
-            die("Something went wrong");
-        }
-    }
-}
+include("config.php");
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -69,7 +20,7 @@ if(isset($_POST["submit"])){
 <body>
 
     <div class="main">
-
+   
         <div class="leftdiv">
             <h1>Don't just watch it - Read It !</h1>
             <h2>Get true & honest reviews at <span style="color:red"> Movies Hub </span></h2>
@@ -79,14 +30,14 @@ if(isset($_POST["submit"])){
         <div class="rightdiv">
             <h1>Create your account</h1>
 
-            <form action="" method="post">
+            <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post">
 
             <div class="container">
 
-            <label for="firstname">First name*</label>
+            <label for="first_name">First name*</label>
             <input type="text" name="first_name" placeholder="Enter your first name" required>
 
-            <label for="lastname">Last name*</label>
+            <label for="last_name">Last name*</label>
             <input type="text"  name= "last_name" placeholder= "Enter your last name" required >
 
             <label for="email">Email*</label>
@@ -101,7 +52,7 @@ if(isset($_POST["submit"])){
             <div class="checkbox"> <i class="fa-solid fa-square-check"></i> <p class="agreementTxt">I have read and agree with the terms of use and Privacy Policy</p></div>
            
 
-            <button type="submit" class="signupbtn">Sign Up</button>
+            <button type="submit" name = "submit" value = "register" class="signupbtn">Sign Up</button>
 
             <p class="signuptxt">Already have an account? <span class="loginLink"><b><a href="../Htmls/login.php">Login</a></b></span></p>
 
@@ -115,3 +66,46 @@ if(isset($_POST["submit"])){
     
 </body>
 </html>
+
+<?php
+
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+        $first_name = filter_input(INPUT_POST, "first_name", FILTER_SANITIZE_SPECIAL_CHARS);
+        $last_name = filter_input(INPUT_POST, "last_name", FILTER_SANITIZE_SPECIAL_CHARS);
+        $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_SPECIAL_CHARS);
+        $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_SPECIAL_CHARS);
+
+
+        if(empty($first_name)){
+                echo "Please enter your first name";
+        }
+       else if(empty($last_name)){
+                echo "Please enter your last name";
+        }
+        else if(empty($email)){
+                echo "Please enter your email";
+        }
+       else if(empty($password)){
+                echo "Please enter your password";
+        }
+        else{
+
+            $hash = password_hash($password, PASSWORD_DEFAULT);
+            $sql = "INSERT INTO users(first_name, last_name, email, password) 
+                    VALUES ('$first_name', '$last_name' , '$email', '$hash')";
+
+            if (mysqli_query($conn, $sql)) {
+                header("location: login.php");
+                } 
+                else {
+              echo "Error: " . mysqli_error($conn);
+                }        
+        }
+
+    }
+
+    mysqli_close($conn);
+
+?>
+
