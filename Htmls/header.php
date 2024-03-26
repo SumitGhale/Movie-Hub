@@ -11,7 +11,7 @@
           <li><a href="../Htmls/favourites.php">FAVOURITES</a></li>
           <li><a href="../Htmls/filterpage.php">SEARCH</a></li>
           <li><a href="/">MENU</a></li>
-          <li><a href="/">SIGN UP</a></li>
+          <li><a href="../Htmls/signup.php">SIGN UP</a></li>
         </ul>
       </div>
     </div>

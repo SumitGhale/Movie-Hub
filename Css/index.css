@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    
 }
 
 .frontScreen{
@@ -106,6 +107,8 @@
     width: 240px;
     margin-bottom: 20px;
 }
+
+
 
 .galleryTop{
     margin-top: 5%;

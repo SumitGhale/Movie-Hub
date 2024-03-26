@@ -8,7 +8,18 @@ if ($conn instanceof mysqli) {
   $sql = "SELECT * FROM movie_hub ORDER BY RAND() LIMIT 10";
   $result = mysqli_query($conn, $sql);
 }
+
+
+
+session_start();
+
+if(!isset($_SESSION['logegdin']) || $_SESSION['loggedin'] !== true)
+{
+  header("location: login.php");
+}
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
