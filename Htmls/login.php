@@ -29,15 +29,15 @@
 
             <div class="container">
 
-            <label for="email">Email</label>
-            <input type="email" placeholder="Enter your email" required>
+            <label for="user_email">Email</label>
+            <input type="email" name="user_email" placeholder="Enter your email" required>
 
             <label for="password">Password</label>
-            <input type="password"  placeholder= "Enter your password" required >
+            <input type="password" name="password" placeholder= "Enter your password" required >
 
             <p class="forgettxt">Forget passoword ?</p>
-            <button type="button" class="submitbtn">Login</button>
-            <p class="signuptxt">Don't have an account? <span class="signupLink"><b><a href="">Sign Up</a></b></span></p>
+            <button type="submit" class="submitbtn">Login</button>
+            <p class="signuptxt">Don't have an account? <span class="signupLink"><b><a href="../Htmls/signup.php">Sign Up</a></b></span></p>
 
             </div>
 

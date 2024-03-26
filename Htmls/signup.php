@@ -1,3 +1,56 @@
+<?php
+
+if(isset($_POST["submit"])){
+    $first_name = $_POST["firstname"];
+    $last_name = $_POST["lastname"];
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+    $confirm_password = $_POST["confirm_password"];
+
+    $password_hash = password_hash($password, PASSWORD_DEFAULT);
+    $errors = array();
+
+    if(empty($firstname) OR empty($last_name) OR empty($email) OR empty($password) OR empty($confirm_password)){
+        array_push($errors, "All fields are required");
+    }
+
+    if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+        array_push ($errors, "Email is not valid");
+    }
+
+    if(strlen($password)<5){
+        array_push($errors, "Password must be atleast 5 characters long");
+    }
+
+    if($password !== $confirm_password){
+        array_push($errors, "Password does not match");
+    }
+
+    if(count($errors) >0){
+        foreach($errors as $error){
+            echo "<div class = 'alert-danger'> $error </div>";
+        }
+    }
+    else{
+        require_once "config.php";
+
+        $sql = "INSERT INTO users(first_name, last_name, email, password) VALUES ( ?, ?, ?, ? )";
+        $stmt = mysqli_stmt_init($conn);
+        $prepareStmt = mysqli_stmt_prepare($stmt, $sql);
+        if($prepareStmt){
+            mysqli_stmt_bind_param($stmt, "ssss", $first_name, $last_name, $email, $password_hash);
+            mysqli_stmt_execute($stmt);
+        }
+
+        else{
+            die("Something went wrong");
+        }
+    }
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,6 +69,7 @@
 <body>
 
     <div class="main">
+
         <div class="leftdiv">
             <h1>Don't just watch it - Read It !</h1>
             <h2>Get true & honest reviews at <span style="color:red"> Movies Hub </span></h2>
@@ -30,26 +84,26 @@
             <div class="container">
 
             <label for="firstname">First name*</label>
-            <input type="text" placeholder="Enter your first name" required>
-
-            <label for="middlename">Middle name (if any)</label>
-            <input type="text"  placeholder= "Enter your middle name"  >
+            <input type="text" name="first_name" placeholder="Enter your first name" required>
 
             <label for="lastname">Last name*</label>
-            <input type="text"  placeholder= "Enter your last name" required >
+            <input type="text"  name= "last_name" placeholder= "Enter your last name" required >
 
             <label for="email">Email*</label>
-            <input type="email"  placeholder= "Enter your email " required >
+            <input type="email"  name="email" placeholder= "Enter your email " required >
 
             <label for="password">Password*</label>
-            <input type="password"  placeholder= "Enter your password" required >
+            <input type="password" name="password" placeholder= "Enter your password" required >
+
+            <label for="confirm_password">Confirm Password*</label>
+            <input type="password" name="confirm_password" placeholder= "Re-enter your password" required >
 
             <div class="checkbox"> <i class="fa-solid fa-square-check"></i> <p class="agreementTxt">I have read and agree with the terms of use and Privacy Policy</p></div>
            
 
-            <button type="button" class="signupbtn">Sign Up</button>
+            <button type="submit" class="signupbtn">Sign Up</button>
 
-            <p class="signuptxt">Already have an account? <span class="loginLink"><b><a href="">Login</a></b></span></p>
+            <p class="signuptxt">Already have an account? <span class="loginLink"><b><a href="../Htmls/login.php">Login</a></b></span></p>
 
             </div>
 

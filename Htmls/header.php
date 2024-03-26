@@ -7,11 +7,11 @@
 
       <div class="headerLinks">
         <ul>
-          <li><a href="/">HOME</a></li>
+          <li><a href="../Htmls/index.php">HOME</a></li>
           <li><a href="/">FAVOURITES</a></li>
           <li><a href="/">SEARCH</a></li>
           <li><a href="/">MENU</a></li>
-          <li><a href="/">SIGN UP</a></li>
+          <li><a href="../Htmls/signup.php">SIGN UP</a></li>
         </ul>
       </div>
     </div>
