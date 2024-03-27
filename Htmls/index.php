@@ -1,13 +1,14 @@
 <?php
+ session_start();
 
-session_start();
+//  echo $_SESSION['email'];
 
-if(!isset($_SESSION['logegdin']) || $_SESSION['loggedin'] !== true)
-{
-  header("location: login.php");
-}
+ if(  $_SESSION['loggedin'] !==true)
+ {
+   header("location: login.php");
+ }
+ ?>
 
-?>
 
 
 <!DOCTYPE html>

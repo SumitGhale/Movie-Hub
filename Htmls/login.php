@@ -1,69 +1,42 @@
 <?php
-//This script will handel login
-
 session_start();
 
-//Check if the user is already logged in
-if(isset($_SESSION['email'])){
-    header("location: index.php");
-    exit;
-}
+// Include database connection file
+include_once("config.php");
 
-require_once "config.php";
-$email = $password = "";
-$err = "";
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    
+    // Validate input (you may add more validation here)
+    if(empty($email) || empty($password)) {
+        $error = "Please enter both email and password";
+    } else {
+        // Retrieve user data from database
+    
+        $sql = "SELECT id,password,email FROM users WHERE email = '$email'";
+        $result = mysqli_query($conn, $sql);
 
-
-//if request method is post
-if($_SERVER['REQUEST_METHOD'] == "POST"){
-    if(empty(trim($_POST['email'])) || empty(trim($_POST['password'])))
-    {
-        $err = "Please enter email + password";
-    }
-
-    else
-    {
-        $email = trim($_POST['email']);
-        $password = trim($_POST['password']);
-    }
-
-    if(empty($err))
-    {
-        $sql = "SELECT id, email, password FROM users WHERE email = ?";
-        $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, "s", $param_email);
-        $param_email = $email;
-
-        //Try to execute this statement
-        if(mysqli_stmt_execute($stmt)){
-            mysqli_stmt_store_result($stmt);
-
-            if(mysqli_stmt_num_rows($stmt) == 1)
-            {
-                mysqli_stmt_bind_result($stmt, $id, $email, $hashed_password);
-                if(mysqli_stmt_fetch($stmt))
-                {
-                    if(password_verify($password, $hashed_password))
-                    {
-                        //This means the password is correct. Allow user to login
-                        session_start();
-                        $_SESSION["email"] = $email; 
-                        $_SESSION["id"] = $id;
-                        $_SESSION["loggedin"] = true;
-
-                        //Redirect user to index.php
-                        header("location: index.php");
-                    }
-                }
+        if (mysqli_error($conn)) {
+            echo "Error: Invalid email or password";
             }
+            while ($row = mysqli_fetch_assoc($result)) {
 
-        }
+                $stored_password = $row['password'];
+
+                if(password_verify($password,$stored_password)) {
+                    $_SESSION['user_id'] = $row['id'];
+                    $_SESSION['email'] = $row['email'];
+                    $_SESSION['loggedin'] = true;
+                    header("location: index.php"); 
+                    exit;
+                } else {
+                    $error = "Invalid email or password";
+                }
+               }
     }
 }
-
-
 ?>
-
 
 
 
@@ -96,18 +69,18 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             <h1>Login</h1>
             <h3>Enter your login details</h3>
 
-            <form action="" method="post">
+            <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post">
 
             <div class="container">
 
-            <label for="user_email">Email</label>
-            <input type="email" name="user_email" placeholder="Enter your email" required>
+            <label for="email">Email</label>
+            <input type="email" name="email" placeholder="Enter your email" required>
 
             <label for="password">Password</label>
             <input type="password" name="password" placeholder= "Enter your password" required >
 
             <p class="forgettxt">Forget passoword ?</p>
-            <button type="submit" class="submitbtn">Login</button>
+            <button type="submit" name = "submit" value = "register" class="submitbtn">Login</button>
             <p class="signuptxt">Don't have an account? <span class="signupLink"><b><a href="../Htmls/signup.php">Sign Up</a></b></span></p>
 
             </div>
