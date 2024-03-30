@@ -7,3 +7,6 @@ session_destroy();
 header("loaction: login.php");
 
 ?>
+
+
+

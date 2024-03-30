@@ -13,7 +13,7 @@
           <li><a href="../Htmls/index.php">HOME</a></li>
           <li><a href="../Htmls/favourites.php">FAVOURITES</a></li>
           <li><a href="../Htmls/filterpage.php">SEARCH</a></li>
-          <li><a href="/">MENU</a></li>
+          <li><a href="../Htmls/userAccount.php">MENU</a></li>
           <li id="replacingNavText"><a href="../Htmls/signup.php">SIGN UP</a></li>
         </ul>
       </div>
