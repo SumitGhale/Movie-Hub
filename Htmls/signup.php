@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 include("config.php");
 if(isset($_POST["submit"])){
     $first_name = $_POST["first_name"];
@@ -13,6 +15,7 @@ if(isset($_POST["submit"])){
     }
 else{
     if($password == $confirm_password){
+        // $_SESSION['first_name'] = $first_name;
         $hash = password_hash($password, PASSWORD_DEFAULT);
         $query = "INSERT INTO users(first_name, last_name, email, password) 
                         VALUES ('$first_name', '$last_name' , '$email', '$hash')";

@@ -67,16 +67,3 @@ function reset() {
     });
 
 }
-
-// const myModal = document.querySelector('.myModal')
-// const confirm_logout = document.querySelector('.confirm_logout')
-// const close_modal = document.querySelector('.close_modal')
-
-// myModal.addEventListener('click', () => {
-//     console.log("i am here");
-//     confirm_logout.showModal();
-// })
-
-// close_modal.addEventListener('click', () => {
-//     confirm_logout.close();
-// })

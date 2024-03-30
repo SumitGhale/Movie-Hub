@@ -1,11 +1,28 @@
 <?php
  session_start();
+// include("database.php");
+
+// if ($conn instanceof mysqli) {
+//   if ($conn->connect_error) {
+//     die("Connection failed: " . $conn->connect_error);
+//   }
+//   $sql = "SELECT * FROM movie_hub ORDER BY RAND() LIMIT 10";
+//   $result = mysqli_query($conn, $sql);
+// }
+
+
 
 //  echo $_SESSION['email'];
 
  if(  $_SESSION['loggedin'] !==true)
  {
    header("location: login.php");
+  //  $first_name = $_SESSION['first_name'];
+}
+
+if(isset($_SESSION['email'])){
+  echo '<h1>Welcome '. $_SESSION['email']. '</h1>';
+  
  }
  ?>
 
@@ -55,131 +72,17 @@
   </div>
 
   <div class="galleryTop">
-
-    <div class="movieCard">
-      <img src="../images/conjuring.jpg" class="cardImage">
-      <div class="cardBottom">
-        <p class="movieTitle">The Conjuring</p>
-        <p class="movieYearGenre">2018, Horror</p>
-        <div class="stars">
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
+  
+        <div class="movieCard">
+          <img src="../images/" class="cardImage">
+          <div class="cardBottom">
+            <p class="movieTitle"></p>
+            <p class="movieYearGenre">, Horror</p>
+            <div class="stars">
+            </div>
+          </div>
         </div>
-      </div>
-
-    </div>
-
-    <div class="movieCard">
-      <img src="../images/madagascar.jpg" class="cardImage">
-      <div class="cardBottom">
-        <p class="movieTitle">Madagascar</p>
-        <p class="movieYearGenre">2018, Action</p>
-        <div class="stars">
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-        </div>
-      </div>
-    </div>
-
-    <div class="movieCard">
-      <img src="../images/madameweb.jpeg" class="cardImage">
-      <div class="cardBottom">
-        <p class="movieTitle">Madame Web</p>
-        <p class="movieYearGenre">2018, Action</p>
-        <div class="stars">
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-        </div>
-      </div>
-    </div>
-
-    <div class="movieCard">
-      <img src="../images/pussinboots.jpg" class="cardImage">
-      <div class="cardBottom">
-        <p class="movieTitle">Puss in Boots</p>
-        <p class="movieYearGenre">2018, Action</p>
-        <div class="stars">
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="galleryBottom">
-
-    <div class="movieCard">
-      <img src="../images/fastandfurious.jpg" class="cardImage">
-      <div class="cardBottom">
-        <p class="movieTitle">Fast and Furious</p>
-        <p class="movieYearGenre">2018, Action</p>
-        <div class="stars">
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-        </div>
-      </div>
-    </div>
-
-    <div class="movieCard">
-      <img src="../images/transformers.jpg" class="cardImage">
-      <div class="cardBottom">
-        <p class="movieTitle">Transformers</p>
-        <p class="movieYearGenre">2018, Action</p>
-        <div class="stars">
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-        </div>
-      </div>
-    </div>
-
-    <div class="movieCard">
-      <img src="../images/vamprie.jpg" class="cardImage">
-      <div class="cardBottom">
-        <p class="movieTitle">The Vampire Diaries</p>
-        <p class="movieYearGenre">2018, Action</p>
-        <div class="stars">
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-        </div>
-      </div>
-    </div>
-
-    <div class="movieCard">
-      <img src="../images/dune.png" class="cardImage">
-      <div class="cardBottom">
-        <p class="movieTitle">Dune</p>
-        <p class="movieYearGenre">2018, Action</p>
-        <div class="stars">
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-        </div>
-      </div>
-    </div>
+    
   </div>
 
   <div class="upcomingPoster">
@@ -210,14 +113,14 @@
 
         <div class="upcomingMainDesc">
           <p>
-          Bruce Wayne, a billionaire, believes that Superman is a threat to humanity after his battle in Metropolis. Thus, he decides to adopt his mantle of Batman and defeat him once and for all.After losing Vanessa (Morena Baccarin), the love of his life, 4th-wall breaking mercenary Wade Wilson aka Deadpool (Ryan Reynolds) must assemble a team and protect a young, full-figured mutant Russell Collins aka Firefist (Julian Dennison)
+            Bruce Wayne, a billionaire, believes that Superman is a threat to humanity after his battle in Metropolis. Thus, he decides to adopt his mantle of Batman and defeat him once and for all.After losing Vanessa (Morena Baccarin), the love of his life, 4th-wall breaking mercenary Wade Wilson aka Deadpool (Ryan Reynolds) must assemble a team and protect a young, full-figured mutant Russell Collins aka Firefist (Julian Dennison)
             from Cable (Josh Brolin).</p>
         </div>
 
         <div class="upcomingCasting">
-           <p> <span class="boldText">Director: </span>David Leitch</p>
-           <p> <span class="boldText">Writers: </span>Rhett Reese, Paul Wernick</p>
-           <p> <span class="boldText">Stars: </span>Ryan Reynolds, Josh Brolin, Morena Baccarin</p>
+          <p> <span class="boldText">Director: </span>David Leitch</p>
+          <p> <span class="boldText">Writers: </span>Rhett Reese, Paul Wernick</p>
+          <p> <span class="boldText">Stars: </span>Ryan Reynolds, Josh Brolin, Morena Baccarin</p>
         </div>
 
       </div>
@@ -251,3 +154,5 @@
 </body>
 
 </html>
+
+<?php

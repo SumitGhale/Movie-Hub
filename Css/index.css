@@ -105,9 +105,8 @@
 }
 
 .movieCard{
-    height: 240px;
-    width: 280px;
-    background-color: black;
+    width: 240px;
+    margin-bottom: 20px;
 }
 
 
@@ -115,27 +114,23 @@
 .galleryTop{
     margin-top: 5%;
     display: flex;
-    gap: 3%;
-    justify-content: center;
-}
-
-.galleryBottom{
-    margin-top: 10%;
-    display: flex;
+    flex-wrap: wrap;
     gap: 3%;
     justify-content: center;
 }
 
 .cardImage{
-    height: 240px;
-    width: 280px;
+    height: 198px;
+    width: 238px;
     object-fit: cover;
-
+    object-position: top;
 }
 
 .cardBottom{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding-bottom: 1rem;
+    width: 238px;
+    background: white;
 }
 
 .cardBottom p {
@@ -154,7 +149,7 @@
 }
 
 .upcomingPoster{
-    margin-top: 11%;
+    /* margin-top: 11%; */
     background-color: black;
 }
 
