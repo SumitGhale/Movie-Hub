@@ -2,7 +2,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: black;
     
 }
 
@@ -206,7 +207,7 @@
     padding: 2% 0;
 }
 
-.upcomingBtn1{
+.upcomingBtn1 {
     font-size: 19px;
     border: 2px solid black;
     color: black;
@@ -216,7 +217,7 @@
     border-radius: 5%;
 }
 
-.upcomingBtn1:hover{
+.upcomingBtn1 :hover{
     color: white;
     background-color: #534d4d;
 }
@@ -264,6 +265,7 @@
 .playIcon i{
     padding-right: 8px;
 }
+
 
 .addIcon{
     padding-right: 8px;
