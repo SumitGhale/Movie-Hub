@@ -5,18 +5,18 @@ if ($conn instanceof mysqli) {
   if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
   }
-  $sql = "SELECT * FROM movie_hub ORDER BY RAND() LIMIT 10";
+  $sql = "SELECT * FROM movie ORDER BY RAND() LIMIT 10";
   $result = mysqli_query($conn, $sql);
 }
 
 
 
-session_start();
+// session_start();
 
-if(!isset($_SESSION['logegdin']) || $_SESSION['loggedin'] !== true)
-{
-  header("location: login.php");
-}
+// if(!isset($_SESSION['logegdin']) || $_SESSION['loggedin'] !== true)
+// {
+//   header("location: login.php");
+// }
 
 ?>
 
@@ -31,7 +31,7 @@ if(!isset($_SESSION['logegdin']) || $_SESSION['loggedin'] !== true)
   <link rel="stylesheet" href="../Css/header.css">
   <link rel="stylesheet" href="../Css/index.css">
   <link rel="stylesheet" href="../Css/footer.css">
-
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <?php include 'header.php'; ?>
@@ -73,7 +73,28 @@ if(!isset($_SESSION['logegdin']) || $_SESSION['loggedin'] !== true)
           <img src="../images/<?php echo $row['image'] ?>" class="cardImage">
           <div class="cardBottom">
             <p class="movieTitle"><?php echo $row['title'] ?></p>
-            <p class="movieYearGenre"><?php echo $row['release_date'] ?>, Horror</p>
+            <?php
+            $movieId = $row['id'];
+            $sql = "SELECT g.genre_name
+                                                        FROM movie_genre AS mg
+                                                        INNER JOIN genre AS g ON mg.genre_id = g.genre_id
+                                                        WHERE mg.id = $movieId";
+
+            $genresResult = mysqli_query($conn, $sql);
+            if ($genresResult->num_rows > 0) {
+              $genresArray = [];
+              while ($genreNameRow = $genresResult->fetch_assoc()) {
+                $genresArray[] = $genreNameRow['genre_name'];
+              }
+              $genres = implode(' / ', $genresArray);
+            } else {
+              // Reset $genresArray if no genres found for the movie
+              // or any other default value
+              $genres = "No genres found";
+            }
+            ?>
+            <p class="movieYearGenre"><?php echo $row['release_date'] ?>, <?php echo $genres ?></p>
+
             <div class="stars">
               <?php
               for ($i = 1; $i <= 5; $i++) {
@@ -85,6 +106,7 @@ if(!isset($_SESSION['logegdin']) || $_SESSION['loggedin'] !== true)
               }
               ?>
             </div>
+            <a class="btn btn-primary ms-3" href="../Htmls/eachProduct.php?id=<?php echo $row['id'] ?>" role="button">View more...</a>
           </div>
         </div>
     <?php
@@ -153,12 +175,12 @@ if(!isset($_SESSION['logegdin']) || $_SESSION['loggedin'] !== true)
   <div class="contactUsPoster">
     <img src="../images/drstrange.png" alt="Contact Us Poster">
     <h1>Any Queries or Suggestions?</h1>
-    <h2>Feel free to email us at : </h2>
-    <h3>Urreviewmatters91@gmail.com</h3>
+    <h2 class="text-light">Feel free to email us at : </h2>
+    <h3 class="text-light">Urreviewmatters91@gmail.com</h3>
   </div>
 
   <?php include 'footer.php'; ?>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 </body>
 
