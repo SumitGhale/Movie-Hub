@@ -1,5 +1,6 @@
 <?php
-include("database.php");
+ session_start();
+// include("database.php");
 
 if ($conn instanceof mysqli) {
   if ($conn->connect_error) {
@@ -9,6 +10,17 @@ if ($conn instanceof mysqli) {
   $result = mysqli_query($conn, $sql);
 }
 
+//  echo $_SESSION['email'];
+ if(  $_SESSION['loggedin'] !==true)
+ {
+   header("location: login.php");
+  //  $first_name = $_SESSION['first_name'];
+}
+
+if(isset($_SESSION['email'])){
+  echo '<h1>Welcome '. $_SESSION['email']. '</h1>';
+ }
+ ?>
 
 
 // session_start();
@@ -35,6 +47,7 @@ if ($conn instanceof mysqli) {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <?php include 'header.php'; ?>
+  
 </head>
 
 <body>
@@ -65,12 +78,9 @@ if ($conn instanceof mysqli) {
   </div>
 
   <div class="galleryTop">
-    <?php
-    if ($result->num_rows > 0) {
-      while ($row = $result->fetch_assoc()) {
-    ?>
+  
         <div class="movieCard">
-          <img src="../images/<?php echo $row['image'] ?>" class="cardImage">
+          <img src="../images/" class="cardImage">
           <div class="cardBottom">
             <p class="movieTitle"><?php echo $row['title'] ?></p>
             <?php
@@ -96,24 +106,11 @@ if ($conn instanceof mysqli) {
             <p class="movieYearGenre"><?php echo $row['release_date'] ?>, <?php echo $genres ?></p>
 
             <div class="stars">
-              <?php
-              for ($i = 1; $i <= 5; $i++) {
-                if ($i <= $row['ratings']) {
-                  echo '<i class="fa-solid fa-star"></i>';
-                } else {
-                  echo '<i class="fa-regular fa-star"></i>';
-                }
-              }
-              ?>
             </div>
             <a class="btn btn-primary ms-3" href="../Htmls/eachProduct.php?id=<?php echo $row['id'] ?>" role="button">View more...</a>
           </div>
         </div>
-    <?php
-      }
-    } else {
-      echo "0 results";
-    } ?>
+    
   </div>
 
   <div class="upcomingPoster">
@@ -186,8 +183,3 @@ if ($conn instanceof mysqli) {
 
 </html>
 
-<?php
-if ($conn instanceof mysqli) {
-  mysqli_close($conn);
-}
-?>
