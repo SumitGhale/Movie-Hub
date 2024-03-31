@@ -9,7 +9,7 @@
     height: 130vh;
     width: 100%;
     display: flex;
-    background-color: rgb(46, 46, 101);
+    background-color: #ebecf0;
     align-items: center;
     gap: 3%;
 }

@@ -11,12 +11,12 @@ if ($conn instanceof mysqli) {
 //  echo $_SESSION['email'];
 if ($_SESSION['loggedin'] !== true) {
   header("location: login.php");
-  //  $first_name = $_SESSION['first_name'];
 }
 
-if (isset($_SESSION['email'])) {
-  echo '<h1>Welcome ' . $_SESSION['email'] . '</h1>';
-}
+//Code to echo out test the useremail
+// if (isset($_SESSION['email'])) {
+//   echo '<h1>Welcome ' . $_SESSION['email'] . '</h1>';
+// }
 ?>
 
 
