@@ -131,7 +131,7 @@ if(isset($_SESSION['email'])){
     <div class="upcomingButtons">
 
       <button class="upcomingBtn1">
-        <span class="playIcon"><i class="fa-brands fa-youtube"></i></span>Watch Trailer</button>
+      <a href="https://www.youtube.com/watch?v=0WWzgGyAH6Y"><span class="playIcon"><i class="fa-brands fa-youtube"></i></span>Watch Trailer</a></button>
 
       <button class="upcomingBtn2">
         <span class="addIcon"> <i class="fa-solid fa-circle-plus"></i></span>Add to Favourites</button>

@@ -248,7 +248,7 @@
 	          		<span aria-hidden="true">&times;</span>
 	        	</button>
 	      	</div>
-	      	<div class="modal-body">
+	      	<div class="modal-body" >
 	      		<h4 class="text-center mt-2 mb-4">
 	        		<i class="fas fa-star star-light submit_star mr-1" id="submit_star_1" data-rating="1"></i>
                     <i class="fas fa-star star-light submit_star mr-1" id="submit_star_2" data-rating="2"></i>
