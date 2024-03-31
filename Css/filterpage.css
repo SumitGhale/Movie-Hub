@@ -96,6 +96,7 @@ body {
 
 .cardBottom p {
     padding: 2px 16px;
+    margin-bottom: 0;
 }
 
 .stars {

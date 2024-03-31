@@ -1,4 +1,21 @@
-<?php include 'header.php' ?>
+<?php
+include 'header.php';
+include("database.php");
+
+if ($conn instanceof mysqli) {
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+}
+
+// session_start();
+
+// if(!isset($_SESSION['logegdin']) || $_SESSION['loggedin'] !== true)
+// {
+//   header("location: login.php");
+// }
+
+?>
 
 <!doctype html>
 <html lang="en">
@@ -15,7 +32,7 @@
 <body>
     <div class="wrapper">
         <div class="title">
-            <img class="background" src="../images/dune.png" alt="image">
+            <img class="background" src="../images/avengers.jpg" alt="image">
             <div class="title_line"></div>
             <h1 id="main_text">Choose Your Favourite Movie</h1>
             <div class="title_line"></div>
@@ -24,299 +41,164 @@
 
         <h1 class="fs-1 my-4 text-light text-center">Movies</h1>
         <div class="container">
+
             <div class="filters_and_movies">
-                <div class="filters">
-                    <div class="filter_by">
-                        Filter by
+                <form action="" method="GET">
+                    <div class="filters">
+                        <div class="filter_by">
+                            Filter by
+                        </div>
+                        <div class="genres">
+                            <h4>Genre</h4>
+                            <!-- get all genres from database and display it -->
+                            <?php
+                            if ($conn instanceof mysqli) {
+                                $sql = "SELECT * FROM genre";
+                                $genreResult = mysqli_query($conn, $sql);
+                            }
+
+                            if ($genreResult->num_rows > 0) {
+                                while ($genreRow = $genreResult->fetch_assoc()) {
+                                    $checked = [];
+                                    if (isset($_GET['genre'])) {
+                                        $checked = $_GET['genre'];
+                                    }
+                            ?>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="<?php echo $genreRow['genre_id']; ?>" id="<?php echo $genreRow['genre_name']; ?>" <?php if (in_array($genreRow['genre_id'], $checked)) {
+                                                                                                                                                                                        echo "checked";
+                                                                                                                                                                                    } ?> name="genre[]">
+                                        <label class="form-check-label" for="<?php echo $genreRow['genre_name'] ?>">
+                                            <?php echo $genreRow['genre_name'] ?>
+                                        </label>
+                                    </div>
+                            <?php
+                                }
+                            }
+                            ?>
+                            <button type="submit" class="btn btn-primary">Apply changes</button>
+                        </div>
                     </div>
-                    <div class="genres">
-                        <h4>Genre</h4>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="checkbox" value="" id="comics">
-                            <label class="form-check-label" for="comics">
-                                Comics
-                            </label>
-                        </div>
-
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="checkbox" value="" id="romance">
-                            <label class="form-check-label" for="romance">
-                                Romance
-                            </label>
-                        </div>
-
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="checkbox" value="" id="thriller">
-                            <label class="form-check-label" for="thriller">
-                                Thriller
-                            </label>
-                        </div>
-
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="checkbox" value="" id="fiction">
-                            <label class="form-check-label" for="fiction">
-                                Fiction
-                            </label>
-                        </div>
-
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="checkbox" value="" id="non_fiction">
-                            <label class="form-check-label" for="non_fiction">
-                                Non fiction
-                            </label>
-                        </div>
-
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="checkbox" value="" id="comedy" checked>
-                            <label class="form-check-label" for="comedy">
-                                Comedy
-                            </label>
-                        </div>
-                        <button type="button" class="btn btn-primary">Apply changes</button>
-                    </div>
-                </div>
+                </form>
                 <div class="movies">
-                    <div class="movieCard">
-                        <img src="../images/pussinboots.jpg" class="cardImage">
-                        <div class="cardBottom">
-                            <p class="movieTitle">Puss in Boots</p>
-                            <p class="movieYearGenre">2018, Action</p>
-                            <div class="stars">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
+                    <?php
+                    if ($conn instanceof mysqli) {
+                        // check if the check box are checked. if checked get the id using GET and display movies accordingly
+                        if (isset($_GET['genre'])) {
 
-                    <div class="movieCard">
-                        <img src="../images/conjuring.jpg" class="cardImage">
-                        <div class="cardBottom">
-                            <p class="movieTitle">The Conjuring</p>
-                            <p class="movieYearGenre">2018, Horror</p>
-                            <div class="stars">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                        </div>
+                            // get the checked genre and store it in an array
+                            $checked = $_GET['genre'];
+                            foreach ($checked as $checkedGenre) {
+                                if ($conn instanceof mysqli) {
 
-                    </div>
+                                    // get all th movies of checked genres
+                                    $sql = "SELECT m.*
+                                    FROM movie AS m
+                                    INNER JOIN movie_genre AS mg ON m.id = mg.id
+                                    WHERE mg.genre_id = $checkedGenre;";
+                                    $checkedGenreResult = mysqli_query($conn, $sql);
+                                    if (mysqli_num_rows($checkedGenreResult) > 0) {
+                                        while ($row = $checkedGenreResult->fetch_assoc()) {
+                    ?>
+                                            <!-- display the movie cards -->
+                                            <div class="movieCard">
+                                                <img src="../images/<?php echo $row['image'] ?>" class="cardImage">
+                                                <div class="cardBottom">
+                                                    <p class="movieTitle"><?php echo $row['title'] ?></p>
+                                                    <?php
+                                                    $movieId = $row['id'];
 
-                    <div class="movieCard">
-                        <img src="../images/madagascar.jpg" class="cardImage">
-                        <div class="cardBottom">
-                            <p class="movieTitle">Madagascar</p>
-                            <p class="movieYearGenre">2018, Action</p>
-                            <div class="stars">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
+                                                    // query to get genre name from the genre table using the junction table
+                                                    $sql = "SELECT g.genre_name
+                                                        FROM movie_genre AS mg
+                                                        INNER JOIN genre AS g ON mg.genre_id = g.genre_id
+                                                        WHERE mg.id = $movieId";
 
-                    <div class="movieCard">
-                        <img src="../images/madameweb.jpeg" class="cardImage">
-                        <div class="cardBottom">
-                            <p class="movieTitle">Madame Web</p>
-                            <p class="movieYearGenre">2018, Action</p>
-                            <div class="stars">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
+                                                    $genresResult = mysqli_query($conn, $sql);
+                                                    $genresArray = [];
+                                                    if ($genresResult->num_rows > 0) {
+                                                        while ($genreNameRow = $genresResult->fetch_assoc()) {
+                                                            $genresArray[] = $genreNameRow['genre_name'];
+                                                        }
+                                                        $genres = implode(' / ', $genresArray);
+                                                    }
+                                                    ?>
+                                                    <p class="movieYearGenre"><?php echo $row['release_date'] ?>, <?php echo $genres ?></p>
 
-                    <div class="movieCard">
-                        <img src="../images/fastandfurious.jpg" class="cardImage">
-                        <div class="cardBottom">
-                            <p class="movieTitle">Fast and Furious</p>
-                            <p class="movieYearGenre">2018, Action</p>
-                            <div class="stars">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
+                                                    <div class="stars">
+                                                        <?php
+                                                        for ($i = 1; $i <= 5; $i++) {
+                                                            if ($i <= $row['ratings']) {
+                                                                echo '<i class="fa-solid fa-star"></i>';
+                                                            } else {
+                                                                echo '<i class="fa-regular fa-star"></i>';
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </div>
+                                                    <a class="btn btn-primary ms-3" href="../Htmls/eachProduct.php?id=<?php echo $row['id'] ?>" role="button">View more...</a>
+                                                </div>
+                                            </div>
+                                    <?php
+                                        }
+                                        // if box checked and no movie related to the genre found 
+                                    } else {
+                                        echo "movie not found";
+                                    }
+                                }
+                            }
+                            // if any checkbox not checked display all movies.
+                        } else {
+                            $sql = "SELECT * FROM movie ORDER BY RAND() LIMIT 10";
+                            $result = mysqli_query($conn, $sql);
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    ?>
+                                    <div class="movieCard">
+                                        <img src="../images/<?php echo $row['image'] ?>" class="cardImage">
+                                        <div class="cardBottom">
+                                            <p class="movieTitle"><?php echo $row['title'] ?></p>
+                                            <?php
+                                            $movieId = $row['id'];
+                                            // query to get genre name from the genre table using the junction table
+                                            $sql = "SELECT g.genre_name
+                                                        FROM movie_genre AS mg
+                                                        INNER JOIN genre AS g ON mg.genre_id = g.genre_id
+                                                        WHERE mg.id = $movieId";
 
-                    <div class="movieCard">
-                        <img src="../images/transformers.jpg" class="cardImage">
-                        <div class="cardBottom">
-                            <p class="movieTitle">Transformers</p>
-                            <p class="movieYearGenre">2018, Action</p>
-                            <div class="stars">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
+                                            $genresResult = mysqli_query($conn, $sql);
+                                            if ($genresResult->num_rows > 0) {
+                                                $genresArray = [];
+                                                while ($genreNameRow = $genresResult->fetch_assoc()) {
+                                                    //get all the genres of the movie and add it to the array
+                                                    $genresArray[] = $genreNameRow['genre_name'];
+                                                }
+                                                $genres = implode(' / ', $genresArray);
+                                            } else {
+                                                $genres = "No genres found";
+                                            }
+                                            ?>
+                                            <p class="movieYearGenre"><?php echo $row['release_date'] ?>, <?php echo $genres ?></p>
 
-                    <div class="movieCard">
-                        <img src="../images/vamprie.jpg" class="cardImage">
-                        <div class="cardBottom">
-                            <p class="movieTitle">The Vampire Diaries</p>
-                            <p class="movieYearGenre">2018, Action</p>
-                            <div class="stars">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="movieCard">
-                        <img src="../images/dune.png" class="cardImage">
-                        <div class="cardBottom">
-                            <p class="movieTitle">Dune</p>
-                            <p class="movieYearGenre">2018, Action</p>
-                            <div class="stars">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="movieCard">
-                        <img src="../images/pussinboots.jpg" class="cardImage">
-                        <div class="cardBottom">
-                            <p class="movieTitle">Puss in Boots</p>
-                            <p class="movieYearGenre">2018, Action</p>
-                            <div class="stars">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="movieCard">
-                        <img src="../images/conjuring.jpg" class="cardImage">
-                        <div class="cardBottom">
-                            <p class="movieTitle">The Conjuring</p>
-                            <p class="movieYearGenre">2018, Horror</p>
-                            <div class="stars">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="movieCard">
-                        <img src="../images/madagascar.jpg" class="cardImage">
-                        <div class="cardBottom">
-                            <p class="movieTitle">Madagascar</p>
-                            <p class="movieYearGenre">2018, Action</p>
-                            <div class="stars">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="movieCard">
-                        <img src="../images/madameweb.jpeg" class="cardImage">
-                        <div class="cardBottom">
-                            <p class="movieTitle">Madame Web</p>
-                            <p class="movieYearGenre">2018, Action</p>
-                            <div class="stars">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="movieCard">
-                        <img src="../images/fastandfurious.jpg" class="cardImage">
-                        <div class="cardBottom">
-                            <p class="movieTitle">Fast and Furious</p>
-                            <p class="movieYearGenre">2018, Action</p>
-                            <div class="stars">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="movieCard">
-                        <img src="../images/transformers.jpg" class="cardImage">
-                        <div class="cardBottom">
-                            <p class="movieTitle">Transformers</p>
-                            <p class="movieYearGenre">2018, Action</p>
-                            <div class="stars">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="movieCard">
-                        <img src="../images/vamprie.jpg" class="cardImage">
-                        <div class="cardBottom">
-                            <p class="movieTitle">The Vampire Diaries</p>
-                            <p class="movieYearGenre">2018, Action</p>
-                            <div class="stars">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="movieCard">
-                        <img src="../images/dune.png" class="cardImage">
-                        <div class="cardBottom">
-                            <p class="movieTitle">Dune</p>
-                            <p class="movieYearGenre">2018, Action</p>
-                            <div class="stars">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
+                                            <div class="stars">
+                                                <?php
+                                                for ($i = 1; $i <= 5; $i++) {
+                                                    if ($i <= $row['ratings']) {
+                                                        echo '<i class="fa-solid fa-star"></i>';
+                                                    } else {
+                                                        echo '<i class="fa-regular fa-star"></i>';
+                                                    }
+                                                }
+                                                ?>
+                                            </div>
+                                            <a class="btn btn-primary ms-3" href="../Htmls/eachProduct.php?id=<?php echo $row['id'] ?>" role="button">View more...</a>
+                                        </div>
+                                    </div>
+                    <?php
+                                }
+                            }
+                        }
+                    } ?>
                 </div>
             </div>
         </div>
@@ -324,15 +206,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <Script>
-        let heading = document.querySelector('#main_text');
-
-        window.addEventListener('scroll', () =>{
-            let value = window.scrollY;
-            console.log("i am here" + value);
-            heading.style.marginTop = value * 2.5 + 'px';
-        })
-    </Script>
 </body>
 
 </html>

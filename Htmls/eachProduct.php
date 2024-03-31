@@ -1,5 +1,31 @@
-<!-- add quesionmark  -->
-<?php include 'header.php' ?>
+<?php include 'header.php';
+include("database.php");
+
+if (isset($_GET['id'])) {
+  // Get and sanitize the product ID
+  $productId = $_GET['id'];
+  if ($conn instanceof mysqli) {
+    if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+    }
+    $sql = "SELECT * FROM movie WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('i', $productId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+  }
+}
+
+
+
+// session_start();
+
+// if(!isset($_SESSION['logegdin']) || $_SESSION['loggedin'] !== true)
+// {
+//   header("location: login.php");
+// }
+
+?>
 
 <!doctype html>
 <html lang="en">
@@ -8,40 +34,68 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Each product</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="../Css/eachProduct.css">
 </head>
 
 <body>
-  <div class="poster_and_description">
+  <?php
+  if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+  ?>
+    <div class="poster_and_description">
 
-    <!-- movie poster and description -->
-    <div class="coverphoto">
-      <img class="stImage" src="../images//posterone.jpg" alt="image">
-    </div>
+      <!-- movie poster and description -->
+      <div class="coverphoto">
+        <img class="stImage" src="../images//<?php echo $row['image'] ?>" alt="image">
+      </div>
 
-    <div class="descriptionContainer">
+      <div class="descriptionContainer">
 
-      <!-- left section of the description container -->
-      <div class="leftSection">
-        <div class="filmDescription">
-          <!-- above the horizontal line -->
-          <div class="aboveLine">
-            <div class="title">
-              <h1 class="d-inline">Avatar: The Last Airbender </h1>
-              <p class="movieName d-inline"> <b>2019</b></p>
-              <p class="m-0"> <i class="fa-solid fa-film"></i> Action / Adventure / Comedy</p>
+        <!-- left section of the description container -->
+        <div class="leftSection">
+          <div class="filmDescription">
+            <!-- above the horizontal line -->
+            <div class="aboveLine">
+              <div class="title">
+                <h1 class="d-inline"><?php echo $row['title'] ?></h1>
+                <p class="movieName d-inline"> <b><?php echo $row['release_date'] ?></b></p>
+                <p class="m-0"> <i class="fa-solid fa-film"></i>
+                  <?php
+                  //code if the genre id was in the movie table and there were no movie_genre junction table
+                  // $genreString = $row['genre_id'];
+                  // $genres = explode(',', $genreString);
+                  // $genres = array_map('trim', $genres);
+                  // echo implode('/', $genres);
+
+                  //code to echo genre name when we have the movie_genre junction table
+                  $movieId = $row['id'];
+                  $sql = "SELECT g.genre_name
+                                                        FROM movie_genre AS mg
+                                                        INNER JOIN genre AS g ON mg.genre_id = g.genre_id
+                                                        WHERE mg.id = $movieId";
+
+                  $genresResult = mysqli_query($conn, $sql);
+                  $genresArray = [];
+                  if ($genresResult->num_rows > 0) {
+                    while ($genreNameRow = $genresResult->fetch_assoc()) {
+                      $genresArray[] = $genreNameRow['genre_name'];
+                    }
+                    $genres = implode(' / ', $genresArray);
+                    echo $row['release_date'] . ",";
+                    echo $genres;
+                  }
+                  ?>
+                </p>
+              </div>
+              <div class="titleRight">
+                <button type="button" class="btn btn-primary p-10"><i class="fa-solid fa-share-nodes"></i></button>
+                <button type="button" class="btn btn-danger me-4 p-10">Add to watchlist +</button>
+              </div>
             </div>
-            <div class="titleRight">
-              <button type="button" class="btn btn-primary p-10"><i class="fa-solid fa-share-nodes"></i></button>
-              <button type="button" class="btn btn-danger me-4 p-10">Add to watchlist +</button>
-            </div>
-          </div>
-
+          <?php
+        } ?>
           <hr>
 
           <!-- bellow the horizontal line -->
@@ -51,7 +105,7 @@
               <p>
                 <i class="fa-solid fa-money-bill"></i>
                 BUDGET
-                <span class="amount">$160,000,000</span>
+                <span class="amount">$ <?php echo $row['budget'] ?></span>
               </p>
             </div>
             <div class="sharingIocns fs-3 me-4">
@@ -61,182 +115,172 @@
               <i class="fa-brands fa-square-x-twitter text-info"></i>
             </div>
           </div>
+          </div>
+
+          <!-- summary of the movie: -->
+          <div class="detailedInfo">
+            <p class="summary_label">Summary</p>
+            <hr>
+
+            <h1 class="text-secondary">Storyline</h1>
+
+            <p class="text-secondary"><?php echo nl2br($row['description']) ?>
+            </p>
+          </div>
         </div>
 
-        <!-- summary of the movie: -->
-        <div class="detailedInfo">
-          <p class="summary_label">Summary</p>
-          <hr>
+        <!-- right section of the description container -->
+        <div class="rightSection">
+          <img class="miniPoster" src="../images/<?php echo $row['poster_image'] ?>" alt="image">
 
-          <h1 class="text-secondary">Storyline</h1>
+          <div class="director mt-3">
+            <h5 class="m-0">Director</h5>
+            <p class="text-secondary">John Watts</p>
+          </div>
 
-          <p class="text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est quas repudiandae, perferendis distinctio sunt cum quo quasi voluptatibus. Nesciunt hic delectus eligendi, repudiandae voluptatem quaerat? Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis autem rem, cupiditate reprehenderit distinctio laudantium excepturi illum non qui similique aperiam saepe unde quas iusto.
-            <br><br>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente aliquid dolores accusamus explicabo incidunt, aliquam corporis nostrum est molestias possimus doloremque commodi unde aperiam. Architecto:
-          </p>
-          <ul class="text-secondary">
-            <li>Property number one</li>
-            <li>Property number two</li>
-            <li>Property number three</li>
-            <li>Property number four</li>
-          </ul>
-          <p class="text-secondary">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos dolorum hic aperiam sequi aliquid ut doloremque iure cumque vitae delectus consequatur sit, porro fugit, consectetur eaque animi illum doloribus. Optio, iste. Deserunt consectetur saepe culpa at nesciunt corrupti voluptate a error temporibus? Neque iste quibusdam rerum at, fugiat debitis cumque? Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat porro hic, minima tenetur est quae excepturi praesentium maxime asperiores error, doloremque dolorum nisi impedit sapiente.
-          </p>
-        </div>
-      </div>
+          <div class="writers mt-3">
+            <h5 class="m-0">Writers</h5>
+            <p class="text-secondary">Erik Sommers, Stan Lee, John Doe</p>
+          </div>
 
-      <!-- right section of the description container -->
-      <div class="rightSection">
-        <img class="miniPoster" src="../images/Gordon.jpg" alt="image">
+          <div class="cast mt-3">
+            <h5 class="m-0">Cast</h5>
+            <p class="text-secondary">Robert Downey Johnson, Robert Downey Junior</p>
+          </div>
 
-        <div class="director mt-3">
-          <h5 class="m-0">Director</h5>
-          <p class="text-secondary">John Watts</p>
-        </div>
-
-        <div class="writers mt-3">
-          <h5 class="m-0">Writers</h5>
-          <p class="text-secondary">Erik Sommers, Stan Lee, John Doe</p>
-        </div>
-
-        <div class="cast mt-3">
-          <h5 class="m-0">Cast</h5>
-          <p class="text-secondary">Robert Downey Johnson, Robert Downey Junior</p>
-        </div>
-
-        <div class="Plot mt-3">
-          <h5 class="m-0">Plot</h5>
-          <p class="text-secondary">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odit veniam fuga culpa magnam reprehenderit qui?John Watts</p>
+          <div class="Plot mt-3">
+            <h5 class="m-0">Plot</h5>
+            <p class="text-secondary">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odit veniam fuga culpa magnam reprehenderit qui?John Watts</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- cards -->
-  <div class="text-center m-4">
-    <h2 class="underline_effect">Actors</h2>
-  </div>
+    <!-- cards -->
+    <div class="text-center m-4">
+      <h2 class="underline_effect">Actors</h2>
+    </div>
 
-  <div class="actors">
+    <div class="actors">
 
-    <div class="card" style="width: 18rem;">
-      <img src="../images/MV5BNzIxNGU4M2ItZDdhMi00YmJjLThlNzItMmM0NTljM2RkMjA2XkEyXkFqcGdeQXVyMTA0OTI3NTYw._V1_.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5>Actor Name</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <div class="card" style="width: 18rem;">
+        <img src="../images/MV5BNzIxNGU4M2ItZDdhMi00YmJjLThlNzItMmM0NTljM2RkMjA2XkEyXkFqcGdeQXVyMTA0OTI3NTYw._V1_.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5>Actor Name</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+
+      <div class="card" style="width: 18rem;">
+        <img src="../images/Kia.jpeg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5>Actor Name</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+
+      <div class="card" style="width: 18rem;">
+        <img src="../images/mathew.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5>Actor Name</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+
+      <div class="card" style="width: 18rem;">
+        <img src="../images/Amber.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5>Actor Name</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
       </div>
     </div>
 
-    <div class="card" style="width: 18rem;">
-      <img src="../images/Kia.jpeg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5>Actor Name</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      </div>
+    <!-- Trailer -->
+    <div class="text-center m-4">
+      <h2 class="underline_effect">Link to Trailer</h2>
     </div>
 
-    <div class="card" style="width: 18rem;">
-      <img src="../images/mathew.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5>Actor Name</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      </div>
+    <div class="trailer">
+      <iframe width="100%" height="100%" src=<?php echo $row['link_to_trailer'] ?> title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+      </iframe>
     </div>
 
-    <div class="card" style="width: 18rem;">
-      <img src="../images/Amber.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5>Actor Name</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      </div>
+    <!-- Reviews -->
+    <div class="text-center m-4">
+      <h2 class="underline_effect">Reviews</h2>
     </div>
-  </div>
 
-  <!-- Trailer -->
-  <div class="text-center m-4">
-    <h2 class="underline_effect">Link to Trailer</h2>
-  </div>
-  
-  <div class="trailer">
-    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/ByAn8DF8Ykk?si=5N75v9W2USBT4pzF" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
-    </iframe>
-  </div>
+    <div class="container">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-4 text-center">
+              <h1 class="text-warning mt-4 mb-4">
+                <b><span id="average_rating">0.0</span> / 5</b>
+              </h1>
+              <div class="mb-3">
+                <i class="fas fa-star star-light mr-1 main_star"></i>
+                <i class="fas fa-star star-light mr-1 main_star"></i>
+                <i class="fas fa-star star-light mr-1 main_star"></i>
+                <i class="fas fa-star star-light mr-1 main_star"></i>
+                <i class="fas fa-star star-light mr-1 main_star"></i>
+              </div>
+              <h3><span id="total_review">0</span> Reviews</h3>
+            </div>
+            <div class="col-sm-4">
+              <p>
+              <div class="progress-label-left"><b>5</b> <i class="fas fa-star text-warning"></i></div>
 
-  <!-- Reviews -->
-  <div class="text-center m-4">
-    <h2 class="underline_effect">Reviews</h2>
-  </div>
+              <div class="progress-label-right">(<span id="total_five_star_review">0</span>)</div>
+              <div class="progress">
+                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="five_star_progress"></div>
+              </div>
+              </p>
+              <p>
+              <div class="progress-label-left"><b>4</b> <i class="fas fa-star text-warning"></i></div>
 
-  <div class="container">
-    	<div class="card">
-    		<div class="card-body">
-    			<div class="row">
-    				<div class="col-sm-4 text-center">
-    					<h1 class="text-warning mt-4 mb-4">
-    						<b><span id="average_rating">0.0</span> / 5</b>
-    					</h1>
-    					<div class="mb-3">
-    						<i class="fas fa-star star-light mr-1 main_star"></i>
-                            <i class="fas fa-star star-light mr-1 main_star"></i>
-                            <i class="fas fa-star star-light mr-1 main_star"></i>
-                            <i class="fas fa-star star-light mr-1 main_star"></i>
-                            <i class="fas fa-star star-light mr-1 main_star"></i>
-	    				</div>
-    					<h3><span id="total_review">0</span> Reviews</h3>
-    				</div>
-    				<div class="col-sm-4">
-    					<p>
-                            <div class="progress-label-left"><b>5</b> <i class="fas fa-star text-warning"></i></div>
+              <div class="progress-label-right">(<span id="total_four_star_review">0</span>)</div>
+              <div class="progress">
+                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="four_star_progress"></div>
+              </div>
+              </p>
+              <p>
+              <div class="progress-label-left"><b>3</b> <i class="fas fa-star text-warning"></i></div>
 
-                            <div class="progress-label-right">(<span id="total_five_star_review">0</span>)</div>
-                            <div class="progress">
-                                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="five_star_progress"></div>
-                            </div>
-                        </p>
-    					<p>
-                            <div class="progress-label-left"><b>4</b> <i class="fas fa-star text-warning"></i></div>
-                            
-                            <div class="progress-label-right">(<span id="total_four_star_review">0</span>)</div>
-                            <div class="progress">
-                                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="four_star_progress"></div>
-                            </div>               
-                        </p>
-    					<p>
-                            <div class="progress-label-left"><b>3</b> <i class="fas fa-star text-warning"></i></div>
-                            
-                            <div class="progress-label-right">(<span id="total_three_star_review">0</span>)</div>
-                            <div class="progress">
-                                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="three_star_progress"></div>
-                            </div>               
-                        </p>
-    					<p>
-                            <div class="progress-label-left"><b>2</b> <i class="fas fa-star text-warning"></i></div>
-                            
-                            <div class="progress-label-right">(<span id="total_two_star_review">0</span>)</div>
-                            <div class="progress">
-                                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="two_star_progress"></div>
-                            </div>               
-                        </p>
-    					<p>
-                            <div class="progress-label-left"><b>1</b> <i class="fas fa-star text-warning"></i></div>
-                            
-                            <div class="progress-label-right">(<span id="total_one_star_review">0</span>)</div>
-                            <div class="progress">
-                                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="one_star_progress"></div>
-                            </div>               
-                        </p>
-    				</div>
-    				<div class="col-sm-4 text-center">
-    					<h3 class="mt-4 mb-3">Place Your Review Here</h3>
-    					<button type="button" name="add_review" id="add_review" class="btn btn-primary">Review</button>
-    				</div>
-    			</div>
-    		</div>
-    	</div>
-    	<div class="mt-5" id="review_content"></div>
+              <div class="progress-label-right">(<span id="total_three_star_review">0</span>)</div>
+              <div class="progress">
+                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="three_star_progress"></div>
+              </div>
+              </p>
+              <p>
+              <div class="progress-label-left"><b>2</b> <i class="fas fa-star text-warning"></i></div>
+
+              <div class="progress-label-right">(<span id="total_two_star_review">0</span>)</div>
+              <div class="progress">
+                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="two_star_progress"></div>
+              </div>
+              </p>
+              <p>
+              <div class="progress-label-left"><b>1</b> <i class="fas fa-star text-warning"></i></div>
+
+              <div class="progress-label-right">(<span id="total_one_star_review">0</span>)</div>
+              <div class="progress">
+                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="one_star_progress"></div>
+              </div>
+              </p>
+            </div>
+            <div class="col-sm-4 text-center">
+              <h3 class="mt-4 mb-3">Place Your Review Here</h3>
+              <button type="button" name="add_review" id="add_review" class="btn btn-primary">Review</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-5" id="review_content"></div>
     </div>
 </body>
+
 </html>
 
 <div id="review_modal" class="modal" tabindex="-1" role="dialog">
@@ -248,7 +292,7 @@
 	          		<span aria-hidden="true">&times;</span>
 	        	</button>
 	      	</div>
-	      	<div class="modal-body" >
+	      	<div class="modal-body">
 	      		<h4 class="text-center mt-2 mb-4">
 	        		<i class="fas fa-star star-light submit_star mr-1" id="submit_star_1" data-rating="1"></i>
                     <i class="fas fa-star star-light submit_star mr-1" id="submit_star_2" data-rating="2"></i>
@@ -273,205 +317,194 @@
 
 <?php include 'footer.php' ?>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-  <script>
-    $(document).ready(function(){
+<script>
+  $(document).ready(function() {
 
-   
+
     var rating_data = 0;
 
-$('#add_review').click(function(){
+    $('#add_review').click(function() {
 
-    $('#review_modal').modal('show');
+      $('#review_modal').modal('show');
 
-});
+    });
 
-$(document).on('mouseenter', '.submit_star', function(){
+    $(document).on('mouseenter', '.submit_star', function() {
 
-    var rating = $(this).data('rating');
+      var rating = $(this).data('rating');
 
-    reset_background();
+      reset_background();
 
-    for(var count = 1; count <= rating; count++)
-    {
+      for (var count = 1; count <= rating; count++) {
 
-        $('#submit_star_'+count).addClass('text-warning');
+        $('#submit_star_' + count).addClass('text-warning');
 
+      }
+
+    });
+
+    function reset_background() {
+      for (var count = 1; count <= 5; count++) {
+
+        $('#submit_star_' + count).addClass('star-light');
+
+        $('#submit_star_' + count).removeClass('text-warning');
+
+      }
     }
 
-});
+    $(document).on('mouseleave', '.submit_star', function() {
 
-function reset_background()
-{
-    for(var count = 1; count <= 5; count++)
-    {
+      reset_background();
 
-        $('#submit_star_'+count).addClass('star-light');
+      for (var count = 1; count <= rating_data; count++) {
 
-        $('#submit_star_'+count).removeClass('text-warning');
+        $('#submit_star_' + count).removeClass('star-light');
 
-    }
-}
+        $('#submit_star_' + count).addClass('text-warning');
+      }
 
-$(document).on('mouseleave', '.submit_star', function(){
+    });
 
-    reset_background();
+    $(document).on('click', '.submit_star', function() {
 
-    for(var count = 1; count <= rating_data; count++)
-    {
+      rating_data = $(this).data('rating');
 
-        $('#submit_star_'+count).removeClass('star-light');
+    });
 
-        $('#submit_star_'+count).addClass('text-warning');
-    }
+    $('#save_review').click(function() {
 
-});
+      var user_name = $('#user_name').val();
 
-$(document).on('click', '.submit_star', function(){
+      var user_review = $('#user_review').val();
 
-    rating_data = $(this).data('rating');
-
-});
-
-$('#save_review').click(function(){
-
-    var user_name = $('#user_name').val();
-
-    var user_review = $('#user_review').val();
-
-    if(user_name == '' || user_review == '')
-    {
+      if (user_name == '' || user_review == '') {
         alert("Please Fill Both Field");
         return false;
-    }
-    else
-    {
+      } else {
         $.ajax({
-            url:"submit_rating.php",
-            method:"POST",
-            data:{rating_data:rating_data, user_name:user_name, user_review:user_review},
-            success:function(data)
-            {
-                $('#review_modal').modal('hide');
+          url: "submit_rating.php",
+          method: "POST",
+          data: {
+            rating_data: rating_data,
+            user_name: user_name,
+            user_review: user_review
+          },
+          success: function(data) {
+            $('#review_modal').modal('hide');
 
-                load_rating_data();
+            load_rating_data();
 
-                alert(data);
-            }
-        })
-    }
-});
-
-load_rating_data();
-
-function load_rating_data()
-    {
-        $.ajax({
-            url:"submit_rating.php",
-            method:"POST",
-            data:{action:'load_data'},
-            dataType:"JSON",
-            success:function(data)
-          {
-            $('#average_rating').text(data.average_rating);
-            $('#total_review').text(data.total_review);
-
-            var count_star = 0;
-
-            $('.main_star').each(function(){
-                    count_star++;
-                    if(Math.ceil(data.average_rating) >= count_star)
-                    {
-                        $(this).addClass('text-warning');
-                        $(this).addClass('star-light');
-                    }
-                });
-
-                $('#total_five_star_review').text(data.five_star_review);
-
-                $('#total_four_star_review').text(data.four_star_review);
-
-                $('#total_three_star_review').text(data.three_star_review);
-
-                $('#total_two_star_review').text(data.two_star_review);
-
-                $('#total_one_star_review').text(data.one_star_review);
-
-                $('#five_star_progress').css('width', (data.five_star_review/data.total_review) * 100 + '%');
-
-                $('#four_star_progress').css('width', (data.four_star_review/data.total_review) * 100 + '%');
-
-                $('#three_star_progress').css('width', (data.three_star_review/data.total_review) * 100 + '%');
-
-                $('#two_star_progress').css('width', (data.two_star_review/data.total_review) * 100 + '%');
-
-                $('#one_star_progress').css('width', (data.one_star_review/data.total_review) * 100 + '%');
-
-                if(data.review_data.length > 0)
-                {
-                    var html = '';
-
-                    for(var count = 0; count < data.review_data.length; count++)
-                    {
-                        html += '<div class="row mb-3">';
-
-                        html += '<div class="col-sm-1"><div class="rounded-circle bg-danger text-white pt-2 pb-2"><h3 class="text-center">'+data.review_data[count].user_name.charAt(0)+'</h3></div></div>';
-
-                        html += '<div class="col-sm-11">';
-
-                        html += '<div class="card">';
-
-                        html += '<div class="card-header"><b>'+data.review_data[count].user_name+'</b></div>';
-
-                        html += '<div class="card-body">';
-
-                        for(var star = 1; star <= 5; star++)
-                        {
-                            var class_name = '';
-
-                            if(data.review_data[count].rating >= star)
-                            {
-                                class_name = 'text-warning';
-                            }
-                            else
-                            {
-                                class_name = 'star-light';
-                            }
-
-                            html += '<i class="fas fa-star '+class_name+' mr-1"></i>';
-                        }
-
-                        html += '<br />';
-
-                        html += data.review_data[count].user_review;
-
-                        html += '</div>';
-
-                        html += '<div class="card-footer text-right">On '+data.review_data[count].datetime+'</div>';
-
-                        html += '</div>';
-
-                        html += '</div>';
-
-                        html += '</div>';
-                    }
-
-                    $('#review_content').html(html);
-                }
-
-
-
+            alert(data);
           }
         })
       }
+    });
+
+    load_rating_data();
+
+    function load_rating_data() {
+      $.ajax({
+        url: "submit_rating.php",
+        method: "POST",
+        data: {
+          action: 'load_data'
+        },
+        dataType: "JSON",
+        success: function(data) {
+          $('#average_rating').text(data.average_rating);
+          $('#total_review').text(data.total_review);
+
+          var count_star = 0;
+
+          $('.main_star').each(function() {
+            count_star++;
+            if (Math.ceil(data.average_rating) >= count_star) {
+              $(this).addClass('text-warning');
+              $(this).addClass('star-light');
+            }
+          });
+
+          $('#total_five_star_review').text(data.five_star_review);
+
+          $('#total_four_star_review').text(data.four_star_review);
+
+          $('#total_three_star_review').text(data.three_star_review);
+
+          $('#total_two_star_review').text(data.two_star_review);
+
+          $('#total_one_star_review').text(data.one_star_review);
+
+          $('#five_star_progress').css('width', (data.five_star_review / data.total_review) * 100 + '%');
+
+          $('#four_star_progress').css('width', (data.four_star_review / data.total_review) * 100 + '%');
+
+          $('#three_star_progress').css('width', (data.three_star_review / data.total_review) * 100 + '%');
+
+          $('#two_star_progress').css('width', (data.two_star_review / data.total_review) * 100 + '%');
+
+          $('#one_star_progress').css('width', (data.one_star_review / data.total_review) * 100 + '%');
+
+          if (data.review_data.length > 0) {
+            var html = '';
+
+            for (var count = 0; count < data.review_data.length; count++) {
+              html += '<div class="row mb-3">';
+
+              html += '<div class="col-sm-1"><div class="rounded-circle bg-danger text-white pt-2 pb-2"><h3 class="text-center">' + data.review_data[count].user_name.charAt(0) + '</h3></div></div>';
+
+              html += '<div class="col-sm-11">';
+
+              html += '<div class="card">';
+
+              html += '<div class="card-header"><b>' + data.review_data[count].user_name + '</b></div>';
+
+              html += '<div class="card-body">';
+
+              for (var star = 1; star <= 5; star++) {
+                var class_name = '';
+
+                if (data.review_data[count].rating >= star) {
+                  class_name = 'text-warning';
+                } else {
+                  class_name = 'star-light';
+                }
+
+                html += '<i class="fas fa-star ' + class_name + ' mr-1"></i>';
+              }
+
+              html += '<br />';
+
+              html += data.review_data[count].user_review;
+
+              html += '</div>';
+
+              html += '<div class="card-footer text-right">On ' + data.review_data[count].datetime + '</div>';
+
+              html += '</div>';
+
+              html += '</div>';
+
+              html += '</div>';
+            }
+
+            $('#review_content').html(html);
+          }
 
 
-});
+
+        }
+      })
+    }
 
 
-  </script>
+  });
+</script>
 </body>
 
 </html>
-
