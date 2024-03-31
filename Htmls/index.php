@@ -1,6 +1,7 @@
 <?php
-session_start();
 include("database.php");
+session_start();
+
 
 if ($conn instanceof mysqli) {
   if ($conn->connect_error) {
