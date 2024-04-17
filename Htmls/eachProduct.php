@@ -36,8 +36,8 @@ if (isset($_GET['id'])) {
   if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
   ?>
+    <!-- poster and description -->
     <div class="poster_and_description">
-
       <!-- movie poster and description -->
       <div class="coverphoto">
         <img class="stImage" src="../images//<?php echo $row['image'] ?>" alt="image">
@@ -80,7 +80,7 @@ if (isset($_GET['id'])) {
                       $genresArray[] = $genreNameRow['genre_name'];
                     }
                     $genres = implode(' / ', $genresArray);
-                    echo $row['release_date'] . ",";
+                    echo $row['release_date'] . ", ";
                     echo $genres;
                   }
                   ?>
@@ -142,7 +142,21 @@ if (isset($_GET['id'])) {
 
           <div class="cast mt-3">
             <h5 class="m-0">Cast</h5>
-            <p class="text-secondary">Robert Downey Johnson, Robert Downey Junior</p>
+            <?php
+            $sql = "SELECT * FROM movie_actors AS ma INNER JOIN actors AS a ON ma.actor_id = a.actor_id WHERE ma.id = $movieId";
+            $actorMovieResult = mysqli_query($conn, $sql);
+            $actorsArray = [];
+            if ($actorMovieResult->num_rows > 0) {
+              while ($actorDetailsRow = $actorMovieResult->fetch_assoc()) {
+                $actorsArray[] = $actorDetailsRow['first_name'];
+              }
+              mysqli_data_seek($actorMovieResult, 0);
+              $actors = implode(' / ', $actorsArray);
+            } else {
+              $actors = "No actors found";
+            }
+            ?>
+            <p class="text-secondary"><?php echo $actors ?></p>
           </div>
 
           <div class="Plot mt-3">
@@ -159,45 +173,27 @@ if (isset($_GET['id'])) {
     </div>
 
     <div class="actors">
-
-      <div class="card" style="width: 18rem;">
-        <img src="../images/MV5BNzIxNGU4M2ItZDdhMi00YmJjLThlNzItMmM0NTljM2RkMjA2XkEyXkFqcGdeQXVyMTA0OTI3NTYw._V1_.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5>Actor Name</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-      </div>
-
-      <div class="card" style="width: 18rem;">
-        <img src="../images/Kia.jpeg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5>Actor Name</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-      </div>
-
-      <div class="card" style="width: 18rem;">
-        <img src="../images/mathew.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5>Actor Name</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-      </div>
-
-      <div class="card" style="width: 18rem;">
-        <img src="../images/Amber.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5>Actor Name</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-      </div>
+      <?php
+      if ($actorMovieResult->num_rows > 0) {
+        while ($actorDetailsRow = $actorMovieResult->fetch_assoc()) {
+      ?>
+          <div class="card" style="width: 18rem;">
+            <img src="../images/<?php echo $actorDetailsRow['image'] ?>" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5><?php echo $actorDetailsRow['first_name'] ?> <?php echo $actorDetailsRow['last_name'] ?></h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+          </div>
+      <?php
+        }
+      }
+      ?>
     </div>
 
     <!-- Trailer -->
     <div class="text-center m-4">
       <h2 class="underline_effect">Link to Trailer</h2>
     </div>
-
     <div class="trailer">
       <iframe width="100%" height="100%" src=<?php echo $row['link_to_trailer'] ?> title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
       </iframe>
