@@ -1,6 +1,7 @@
 <?php
-session_start();
 include("database.php");
+session_start();
+
 
 if ($conn instanceof mysqli) {
   if ($conn->connect_error) {
@@ -35,6 +36,14 @@ if ($_SESSION['loggedin'] !== true) {
 
   <?php include 'header.php'; ?>
 
+  <style>
+/* Defining CSS styles for active buttons */
+.categoryBtn.active {
+    background-color: red;
+    color: white;
+}
+</style>
+
 </head>
 
 <body>
@@ -58,21 +67,22 @@ if ($_SESSION['loggedin'] !== true) {
   <p class="titleText1">Know more from our reviews</p>
 
   <div class="releaseCategories">
-    <button class="categoryBtn">Top rated</button>
-    <button class="categoryBtn">Just released</button>
-    <button class="categoryBtn">Upcoming</button>
+    <button id="toprated_button" class="categoryBtn" onclick="highlightButton(this)">Top Rated</button>
+    <button id="justreleased_button" class="categoryBtn" onclick="highlightButton(this)">Just Released</button>
+    <button id="upcoming_button" class="categoryBtn" onclick="highlightButton(this)">Upcoming</button>
 
   </div>
 
   <div class="galleryTop">
 
     <?php
-    $sql = "SELECT * FROM movie ORDER BY RAND() LIMIT 10";
+    $sql = "SELECT * FROM movie ORDER BY RAND()";
     $result = mysqli_query($conn, $sql);
     if ($result->num_rows > 0) {
       while ($row = $result->fetch_assoc()) {
     ?>
-        <div class="movieCard">
+        <div class="movieCard" id="<?php echo $row['status'] ?>">
+
           <img src="../images/<?php echo $row['image'] ?>" class="cardImage">
           <div class="cardBottom">
             <p class="movieTitle"><?php echo $row['title'] ?></p>
@@ -119,6 +129,8 @@ if ($_SESSION['loggedin'] !== true) {
 
   </div>
 
+
+
   <div class="upcomingPoster">
 
     <p class="titleText2">Highly awaited</p>
@@ -164,7 +176,7 @@ if ($_SESSION['loggedin'] !== true) {
     <div class="upcomingButtons">
 
       <button class="upcomingBtn1">
-      <a href="https://www.youtube.com/watch?v=0WWzgGyAH6Y"><span class="playIcon"><i class="fa-brands fa-youtube"></i></span>Watch Trailer</a></button>
+        <a href="https://www.youtube.com/watch?v=0WWzgGyAH6Y"><span class="playIcon"><i class="fa-brands fa-youtube"></i></span>Watch Trailer</a></button>
 
       <button class="upcomingBtn2">
         <span class="addIcon"> <i class="fa-solid fa-circle-plus"></i></span>Add to Favourites</button>
@@ -187,4 +199,50 @@ if ($_SESSION['loggedin'] !== true) {
 
 </body>
 
+<script>
+  // Function to show movie cards based on status
+  function showMovies(status) {
+    // Hide all movie card divs
+    document.querySelectorAll('.movieCard').forEach(card => {
+      card.style.display = 'none';
+    });
+
+    // Show movie cards based on status
+    var movieCards = document.querySelectorAll('#' + status + '.movieCard');
+    movieCards.forEach(card => {
+      card.style.display = 'block';
+    });
+  }
+
+  // Event listeners for filter buttons
+  document.getElementById('toprated_button').addEventListener('click', function() {
+    showMovies('top_rated');
+   
+
+  });
+
+  document.getElementById('justreleased_button').addEventListener('click', function() {
+    showMovies('just_released');
+   
+  });
+
+  document.getElementById('upcoming_button').addEventListener('click', function() {
+    showMovies('upcoming');
+    
+  });
+</script>
+
+
+<script>
+// JavaScript function to highlight the clicked button
+function highlightButton(button) {
+    // Remove 'active' class from all buttons
+    document.querySelectorAll('.categoryBtn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+
+    // Add 'active' class to the clicked button
+    button.classList.add('active');
+}
+</script>
 </html>

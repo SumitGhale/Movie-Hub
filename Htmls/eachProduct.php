@@ -17,7 +17,6 @@ if (isset($_GET['id'])) {
 }
 
 
-
 ?>
 
 <!doctype html>
@@ -56,6 +55,10 @@ if (isset($_GET['id'])) {
                 <p class="movieName d-inline"> <b><?php echo $row['release_date'] ?></b></p>
                 <p class="m-0"> <i class="fa-solid fa-film"></i>
                   <?php
+
+                 
+                  session_start();
+                  $_SESSION['MOVIE_ID'] =  $row['id'];
                   //code if the genre id was in the movie table and there were no movie_genre junction table
                   // $genreString = $row['genre_id'];
                   // $genres = explode(',', $genreString);
@@ -63,7 +66,8 @@ if (isset($_GET['id'])) {
                   // echo implode('/', $genres);
 
                   //code to echo genre name when we have the movie_genre junction table
-                  $movieId = $row['id'];
+                   $movieId = $row['id'];
+                   
                   $sql = "SELECT g.genre_name
                                                         FROM movie_genre AS mg
                                                         INNER JOIN genre AS g ON mg.genre_id = g.genre_id

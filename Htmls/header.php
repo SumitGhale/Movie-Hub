@@ -1,12 +1,28 @@
+<?php
+// session_start();
+include("database.php");
 
+if ($conn instanceof mysqli) {
+  if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+  }
+}
+
+//  echo $_SESSION['email'];
+if (!isset($_SESSION['loggedin'])) {
+  // header("location: login.php");
+  //  $first_name = $_SESSION['first_name'];
+}
+
+?>
 
 
 
 <link rel="stylesheet" href="../Css/header.css">
-    <div class="navbar">
-      <div class="logoIcon">
-        <img src="../images/logo.png" alt="Logo Icon" />
-      </div>
+<div class="navbar">
+  <div class="logoIcon">
+    <img src="../images/logo.png" alt="Logo Icon" />
+  </div>
 
       <div class="headerLinks">
         <ul>
