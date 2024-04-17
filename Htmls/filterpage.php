@@ -31,17 +31,25 @@ if ($conn instanceof mysqli) {
 
 <body>
     <div class="wrapper">
-        <div class="title">
-            <img class="background" src="../images/avengers.jpg" alt="image">
-            <div class="title_line"></div>
-            <h1 id="main_text">Choose Your Favourite Movie</h1>
-            <div class="title_line"></div>
+        <!-- title and search form  -->
+        <div class="search">
+            <div class="title">
+                <form action="" method="GET">
+                    <h1 id="main_text" class="text-center">Choose Your Favourite Movie</h1>
+                    <div class="input-group">
+                        <input type="text" name="search" value="<?php if (isset($_GET['search'])) {
+                                                                    echo $_GET['search'];
+                                                                } ?>" class="form-control search_bar" placeholder="Recipient's username">
+                        <button type="submit" class=" btn btn-danger px-5"> Search </button>
+                    </div>
+                </form>
+            </div>
         </div>
 
-
-        <h1 class="fs-1 my-4 text-light text-center">Movies</h1>
+        <h1 class="fs-1 my-4 text-dark text-center">Movies</h1>
         <div class="container">
 
+        <!-- filter form -->
             <div class="filters_and_movies">
                 <form action="" method="GET">
                     <div class="filters">
@@ -80,6 +88,8 @@ if ($conn instanceof mysqli) {
                         </div>
                     </div>
                 </form>
+
+                <!-- display movies  -->
                 <div class="movies">
                     <?php
                     if ($conn instanceof mysqli) {
@@ -147,13 +157,69 @@ if ($conn instanceof mysqli) {
                                     }
                                 }
                             }
-                            // if any checkbox not checked display all movies.
+                            // if searched by name.
+                        } elseif (isset($_GET['search'])) {
+                            $title = "%" . $_GET['search'] . "%";
+                            $sql = "SELECT * FROM movie WHERE title LIKE ?";
+                            $stmt = $conn->prepare($sql);
+                            $stmt->bind_param('s', $title);
+                            $stmt->execute();
+                            $result = $stmt->get_result();
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    ?>
+                                    <div class="movieCard">
+                                        <img src="../images/<?php echo $row['image'] ?>" class="cardImage">
+                                        <div class="cardBottom">
+                                            <p class="movieTitle"><?php echo $row['title'] ?></p>
+                                            <?php
+                                            $movieId = $row['id'];
+                                            // query to get genre name from the genre table using the junction table
+                                            $sql = "SELECT g.genre_name
+                                                        FROM movie_genre AS mg
+                                                        INNER JOIN genre AS g ON mg.genre_id = g.genre_id
+                                                        WHERE mg.id = $movieId";
+
+                                            $genresResult = mysqli_query($conn, $sql);
+                                            if ($genresResult->num_rows > 0) {
+                                                $genresArray = [];
+                                                while ($genreNameRow = $genresResult->fetch_assoc()) {
+                                                    //get all the genres of the movie and add it to the array
+                                                    $genresArray[] = $genreNameRow['genre_name'];
+                                                }
+                                                $genres = implode(' / ', $genresArray);
+                                            } else {
+                                                $genres = "No genres found";
+                                            }
+                                            ?>
+                                            <p class="movieYearGenre"><?php echo $row['release_date'] ?>, <?php echo $genres ?></p>
+
+                                            <div class="stars">
+                                                <?php
+                                                for ($i = 1; $i <= 5; $i++) {
+                                                    if ($i <= $row['ratings']) {
+                                                        echo '<i class="fa-solid fa-star"></i>';
+                                                    } else {
+                                                        echo '<i class="fa-regular fa-star"></i>';
+                                                    }
+                                                }
+                                                ?>
+                                            </div>
+                                            <a class="btn btn-primary ms-3" href="../Htmls/eachProduct.php?id=<?php echo $row['id'] ?>" role="button">View more...</a>
+                                        </div>
+                                    </div>
+                                <?php
+                                }
+                            } else {
+                                echo "No movie found";
+                            }
+                            // if any checkbox not checked and no search value display all movies.
                         } else {
                             $sql = "SELECT * FROM movie ORDER BY RAND() LIMIT 10";
                             $result = mysqli_query($conn, $sql);
                             if ($result->num_rows > 0) {
                                 while ($row = $result->fetch_assoc()) {
-                                    ?>
+                                ?>
                                     <div class="movieCard">
                                         <img src="../images/<?php echo $row['image'] ?>" class="cardImage">
                                         <div class="cardBottom">
@@ -204,7 +270,6 @@ if ($conn instanceof mysqli) {
         </div>
         <?php include 'footer.php' ?>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 

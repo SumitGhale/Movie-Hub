@@ -16,18 +16,27 @@ body {
     perspective: 10px;
 }
 
-.title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    position: relative;
-    color: white;
+.search{
+    background-color: black;
     height: 60vh;
     width: 100vw;
-    z-index: -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    position: relative;
+    color: white;
+    width: 60vw;
+    margin: auto;
+    /* z-index: -1; */
     transform-style: preserve-3d;
-    margin-top: -5vh;
+    /* margin-top: -5vh; */
+}
+
+.search_bar{
+    height: 3rem;
 }
 
 .background {
@@ -48,6 +57,7 @@ body {
     background-color: white;
     border-radius: 4px;
 }
+
 
 .filters_and_movies {
     display: flex;

@@ -31,11 +31,11 @@ if (!isset($_SESSION['loggedin'])) {
       <li><a href="../Htmls/filterpage.php">SEARCH</a></li>
       <li><a href="../Htmls/userAccount.php">MENU</a></li>
       <li id="replacingNavText"><a href="../Htmls/signup.php">
-          <?php if ($_SESSION['loggedin'] === true) {
+          <?php /*if ($_SESSION['loggedin'] === true) {
             echo $_SESSION['email'];
           }else{
             echo "SIGN UP";
-          } ?>
+          }*/ ?>
          
         </a></li>
     </ul>
