@@ -1,22 +1,27 @@
 <?php
+session_start();
+$MOVIE_ID = $_SESSION['MOVIE_ID'];
+$USER_ID = $_SESSION['user_id'];
 $connect = new PDO("mysql:host=localhost;dbname=movie_hub", "root", "");
-
 
 if(isset($_POST["rating_data"]))
 {
 
 	$data = array(
-		':user_name'		=>	$_POST["user_name"],
+		':user_id'		=>	$USER_ID,
 		':user_rating'		=>	$_POST["rating_data"],
 		':user_review'		=>	$_POST["user_review"],
-		':datetime'			=>	time()
+		':datetime'			=>	time(),
+		':movie_id'          => $MOVIE_ID,
 	);
 
 	$query = "
 	INSERT INTO review_table 
-	(user_name, user_rating, user_review, datetime) 
-	VALUES (:user_name, :user_rating, :user_review, :datetime)
+	(user_id, user_rating, user_review, datetime,movie_id) 
+	VALUES (:user_id, :user_rating, :user_review, :datetime, :movie_id)
 	";
+
+	
 
 	$statement = $connect->prepare($query);
 
@@ -39,17 +44,22 @@ if(isset($_POST["action"]))
 	$total_user_rating = 0;
 	$review_content = array();
 
-	$query = "
-	SELECT * FROM review_table 
-	ORDER BY review_id DESC
-	";
+	
+
+	// $query = " SELECT * FROM review_table where movie_id= $MOVIE_ID ORDER BY review_id DESC";
+	
+	$query = "SELECT r.*, u.first_name
+	FROM review_table r
+	JOIN users u ON r.user_id = u.id
+	WHERE r.movie_id = $MOVIE_ID
+	ORDER BY r.review_id DESC";
 
 	$result = $connect->query($query, PDO::FETCH_ASSOC);
 
 	foreach($result as $row)
 	{
 		$review_content[] = array(
-			'user_name'		=>	$row["user_name"],
+			'first_name'		=>	$row["first_name"],
 			'user_review'	=>	$row["user_review"],
 			'rating'		=>	$row["user_rating"],
 			'datetime'		=>	date('l jS, F Y h:i:s A', $row["datetime"])

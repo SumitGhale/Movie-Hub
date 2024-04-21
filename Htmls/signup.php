@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include("config.php");
+include("database.php");
 if(isset($_POST["submit"])){
     $first_name = $_POST["first_name"];
     $last_name = $_POST["last_name"];
@@ -100,42 +100,5 @@ else{
 </html>
 
 
-    <!-- // if($_SERVER["REQUEST_METHOD"] == "POST"){
-
-    //     $first_name = filter_input(INPUT_POST, "first_name", FILTER_SANITIZE_SPECIAL_CHARS);
-    //     $last_name = filter_input(INPUT_POST, "last_name", FILTER_SANITIZE_SPECIAL_CHARS);
-    //     $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_SPECIAL_CHARS);
-    //     $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_SPECIAL_CHARS);
-
-
-    //     if(empty($first_name)){
-    //             echo "Please enter your first name";
-    //     }
-    //    else if(empty($last_name)){
-    //             echo "Please enter your last name";
-    //     }
-    //     else if(empty($email)){
-    //             echo "Please enter your email";
-    //     }
-    //    else if(empty($password)){
-    //             echo "Please enter your password";
-    //     }
-    //     else{
-
-    //         // $hash = password_hash($password, PASSWORD_DEFAULT);
-    //         $sql = "INSERT INTO users(first_name, last_name, email, password) 
-    //                 VALUES ('$first_name', '$last_name' , '$email', '$password')";
-
-    //         if (mysqli_query($conn, $sql)) {
-    //             header("location: login.php");
-    //             } 
-    //             else {
-    //           echo "Error: " . mysqli_error($conn);
-    //             }        
-    //     }
-
-    // }
-
-    // mysqli_close($conn); -->
 
 

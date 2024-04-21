@@ -3,15 +3,13 @@
     padding: 0;
     box-sizing: border-box;
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    /* background-color: black; */
-    
 }
 
 .frontScreen{
     height: 130vh;
     width: 100%;
     display: flex;
-    background-color: rgb(46, 46, 101);
+    background-color: #ebecf0;
     align-items: center;
     gap: 3%;
 }
@@ -104,6 +102,8 @@
     color: white;
     background-color: red;
 }
+
+
 
 .movieCard{
     width: 240px;
@@ -206,14 +206,17 @@
     padding: 2% 0;
 }
 
+.upcomingBtn1 a{
+    text-decoration: none;
+    color: black;
+}
 .upcomingBtn1 {
     font-size: 19px;
     border: 2px solid black;
-    color: black;
-    background-color: white;
     padding: 10px;
     margin-bottom: 5%;
     border-radius: 5%;
+    background-color: white;
 }
 
 .upcomingBtn1 :hover{

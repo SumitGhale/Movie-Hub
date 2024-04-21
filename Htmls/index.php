@@ -12,12 +12,12 @@ if ($conn instanceof mysqli) {
 //  echo $_SESSION['email'];
 if ($_SESSION['loggedin'] !== true) {
   header("location: login.php");
-  //  $first_name = $_SESSION['first_name'];
 }
 
-if (isset($_SESSION['email'])) {
-  echo '<h1>Welcome ' . $_SESSION['email'] . '</h1>';
-}
+//Code to echo out test the useremail
+// if (isset($_SESSION['email'])) {
+//   echo '<h1>Welcome ' . $_SESSION['email'] . '</h1>';
+// }
 ?>
 
 
@@ -35,6 +35,14 @@ if (isset($_SESSION['email'])) {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <?php include 'header.php'; ?>
+
+  <style>
+/* Defining CSS styles for active buttons */
+.categoryBtn.active {
+    background-color: red;
+    color: white;
+}
+</style>
 
 </head>
 
@@ -59,21 +67,22 @@ if (isset($_SESSION['email'])) {
   <p class="titleText1">Know more from our reviews</p>
 
   <div class="releaseCategories">
-    <button class="categoryBtn">Top rated</button>
-    <button class="categoryBtn">Just released</button>
-    <button class="categoryBtn">Upcoming</button>
+    <button id="toprated_button" class="categoryBtn" onclick="highlightButton(this)">Top Rated</button>
+    <button id="justreleased_button" class="categoryBtn" onclick="highlightButton(this)">Just Released</button>
+    <button id="upcoming_button" class="categoryBtn" onclick="highlightButton(this)">Upcoming</button>
 
   </div>
 
   <div class="galleryTop">
 
     <?php
-    $sql = "SELECT * FROM movie ORDER BY RAND() LIMIT 10";
+    $sql = "SELECT * FROM movie ORDER BY RAND()";
     $result = mysqli_query($conn, $sql);
     if ($result->num_rows > 0) {
       while ($row = $result->fetch_assoc()) {
     ?>
-        <div class="movieCard">
+        <div class="movieCard" id="<?php echo $row['status'] ?>">
+
           <img src="../images/<?php echo $row['image'] ?>" class="cardImage">
           <div class="cardBottom">
             <p class="movieTitle"><?php echo $row['title'] ?></p>
@@ -120,6 +129,8 @@ if (isset($_SESSION['email'])) {
 
   </div>
 
+
+
   <div class="upcomingPoster">
 
     <p class="titleText2">Highly awaited</p>
@@ -165,7 +176,7 @@ if (isset($_SESSION['email'])) {
     <div class="upcomingButtons">
 
       <button class="upcomingBtn1">
-        <span class="playIcon"><i class="fa-brands fa-youtube"></i></span>Watch Trailer</button>
+        <a href="https://www.youtube.com/watch?v=0WWzgGyAH6Y"><span class="playIcon"><i class="fa-brands fa-youtube"></i></span>Watch Trailer</a></button>
 
       <button class="upcomingBtn2">
         <span class="addIcon"> <i class="fa-solid fa-circle-plus"></i></span>Add to Favourites</button>
@@ -188,4 +199,50 @@ if (isset($_SESSION['email'])) {
 
 </body>
 
+<script>
+  // Function to show movie cards based on status
+  function showMovies(status) {
+    // Hide all movie card divs
+    document.querySelectorAll('.movieCard').forEach(card => {
+      card.style.display = 'none';
+    });
+
+    // Show movie cards based on status
+    var movieCards = document.querySelectorAll('#' + status + '.movieCard');
+    movieCards.forEach(card => {
+      card.style.display = 'block';
+    });
+  }
+
+  // Event listeners for filter buttons
+  document.getElementById('toprated_button').addEventListener('click', function() {
+    showMovies('top_rated');
+   
+
+  });
+
+  document.getElementById('justreleased_button').addEventListener('click', function() {
+    showMovies('just_released');
+   
+  });
+
+  document.getElementById('upcoming_button').addEventListener('click', function() {
+    showMovies('upcoming');
+    
+  });
+</script>
+
+
+<script>
+// JavaScript function to highlight the clicked button
+function highlightButton(button) {
+    // Remove 'active' class from all buttons
+    document.querySelectorAll('.categoryBtn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+
+    // Add 'active' class to the clicked button
+    button.classList.add('active');
+}
+</script>
 </html>

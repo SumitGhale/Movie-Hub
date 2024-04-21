@@ -24,20 +24,16 @@ if (!isset($_SESSION['loggedin'])) {
     <img src="../images/logo.png" alt="Logo Icon" />
   </div>
 
-  <div class="headerLinks">
-    <ul>
-      <li><a href="../Htmls/index.php">HOME</a></li>
-      <li><a href="../Htmls/favourites.php">FAVOURITES</a></li>
-      <li><a href="../Htmls/filterpage.php">SEARCH</a></li>
-      <li><a href="../Htmls/userAccount.php">MENU</a></li>
-      <li id="replacingNavText"><a href="../Htmls/signup.php">
-          <?php /*if ($_SESSION['loggedin'] === true) {
-            echo $_SESSION['email'];
-          }else{
-            echo "SIGN UP";
-          }*/ ?>
-         
-        </a></li>
-    </ul>
-  </div>
-</div>
+      <div class="headerLinks">
+        <ul>
+          <li><a href="../Htmls/index.php">HOME</a></li>
+          <li><a href="../Htmls/favourites.php">FAVOURITES</a></li>
+          <!-- <li><a href="../Htmls/eachProduct.php">MOVIES</a></li> -->
+          <li><a href="../Htmls/filterpage.php">SEARCH</a></li>
+          <li><a href="../Htmls/userAccount.php">PROFILE</a></li>
+          <!-- <?php $first_name = $_SESSION['first_name'];  ?> -->
+          <!-- <li id="replacingNavText"><a href="../Htmls/signup.php"><?php echo $first_name ?></a></li> -->
+          <li id="replacingNavText"><a href="../Htmls/signup.php">SIGN UP</a></li>
+        </ul>
+      </div>
+    </div>
