@@ -1,4 +1,6 @@
-<?php include 'header.php' ?>
+<?php include 'header.php';
+session_start();
+?>
 
 <!doctype html>
 <html lang="en">
@@ -10,19 +12,44 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../Css/userAccount.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
+    <?php
+    $user_id = $_SESSION['user_id'];
+    $sql = "SELECT * FROM users WHERE id = $user_id";
+
+    $result = mysqli_query($conn, $sql);
+    if ($result->num_rows > 0) {
+        // Output data of each row
+        while ($row = $result->fetch_assoc()) {
+            $first_name = $row['first_name'];
+            $last_name = $row['last_name'];
+            $email = $row['email'];
+        }
+    }
+    ?>
     <!-- rectangle with profile image -->
     <div id="user_image_rectangle">
         <div id="profile_desc">
             <img id="profile_pic" src="../images/mathew.jpg" alt="image">
+        </div>
+
+        <div class="topUserDetails">
             <div id="username">
-                <h3>John Doe</h3>
-                <p>Johnkumar@gmail.com</p>
+                <h3><?php echo $first_name ?></h3><br>
+                <h3><?php echo $last_name ?></h3>
+            </div>
+            <div class="useremail">
+                <p><?php echo $email ?></p>
             </div>
         </div>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reg-modal">Logout</button>
+
+        <div class="logoutBtn">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reg-modal">Logout</button>
+        </div>
+
     </div>
 
     <!-- profile options -->
@@ -45,7 +72,7 @@
                 </li>
                 <li>
                     <a href="#" id="yourlists_btn" class="nav-link link-body-emphasis side_btns">
-                        Your Lists
+                        Your Reviews
                     </a>
                 </li>
                 <li>
@@ -66,85 +93,63 @@
 
             <!-- profile -->
             <div class="section" id="profile">
+
                 <div class="row g-3">
-                    <div class="col-sm-6">
-                        <label for="firstName" class="form-label">First name</label>
-                        <input type="text" class="form-control" id="firstName" placeholder="" value="" required="" fdprocessedid="dmr3i">
-                        <div class="invalid-feedback">
-                            Valid first name is required.
-                        </div>
-                    </div>
+                    <div class="profileTitle"><b>
+                            <p>Edit your details</p>
+                        </b></div>
 
-                    <div class="col-sm-6">
-                        <label for="lastName" class="form-label">Last name</label>
-                        <input type="text" class="form-control" id="lastName" placeholder="" value="" required="" fdprocessedid="kxpm7">
-                        <div class="invalid-feedback">
-                            Valid last name is required.
-                        </div>
-                    </div>
+                    <form method="post">
 
-                    <div class="col-12">
-                        <label for="username" class="form-label">Username</label>
-                        <div class="input-group has-validation">
-                            <span class="input-group-text">@</span>
-                            <input type="text" class="form-control" id="username" placeholder="Username" required="" fdprocessedid="h2z37i">
+                        <div class="col-sm-6">
+                            <label for="firstName" class="form-label ">First name</label>
+                            <input type="text" name="firstName" class="form-control" id="firstName" value="<?php echo $first_name ?>" required="" fdprocessedid="dmr3i">
                             <div class="invalid-feedback">
-                                Your username is required.
+                                Valid first name is required.
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-12">
-                        <label for="email" class="form-label">Email <span class="text-body-secondary">(Optional)</span></label>
-                        <input type="email" class="form-control" id="email" placeholder="you@example.com" fdprocessedid="w2fedd">
-                        <div class="invalid-feedback">
-                            Please enter a valid email address for shipping updates.
+                        <div class="col-sm-6">
+                            <label for="lastName" class="form-label mt-3">Last name</label>
+                            <input type="text" name="lastName" class="form-control" id="lastName" value="<?php echo $last_name ?>" required="" fdprocessedid="kxpm7">
+                            <div class="invalid-feedback">
+                                Valid last name is required.
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-12">
-                        <label for="address" class="form-label">Address</label>
-                        <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="" fdprocessedid="fyysxg">
-                        <div class="invalid-feedback">
-                            Please enter your shipping address.
+
+
+                        <div class="col-12">
+                            <label for="email" class="form-label mt-3">Email </label>
+                            <input type="email" name="email" class="form-control" id="email" value="<?php echo $email ?>" fdprocessedid="w2fedd">
+                            <div class="invalid-feedback">
+                                Please enter a valid email address for shipping updates.
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-12">
-                        <label for="address2" class="form-label">Address 2 <span class="text-body-secondary">(Optional)</span></label>
-                        <input type="text" class="form-control" id="address2" placeholder="Apartment or suite" fdprocessedid="1dkqqa">
-                    </div>
+                        <button type="submit" class="btn btn-primary mt-3">Save changes</button>
+                    </form>
 
-                    <div class="col-md-5">
-                        <label for="country" class="form-label">Country</label>
-                        <select class="form-select" id="country" required="" fdprocessedid="doj4hm">
-                            <option value="">Choose...</option>
-                            <option>United States</option>
-                        </select>
-                        <div class="invalid-feedback">
-                            Please select a valid country.
-                        </div>
-                    </div>
+                    <?php
 
-                    <div class="col-md-4">
-                        <label for="state" class="form-label">State</label>
-                        <select class="form-select" id="state" required="" fdprocessedid="8pjd6d">
-                            <option value="">Choose...</option>
-                            <option>California</option>
-                        </select>
-                        <div class="invalid-feedback">
-                            Please provide a valid state.
-                        </div>
-                    </div>
+                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                        // Retrieve form data
+                        $first_name = $_POST['firstName'];
+                        $last_name = $_POST['lastName'];
+                        $email = $_POST['email'];
 
-                    <div class="col-md-3">
-                        <label for="zip" class="form-label">Zip</label>
-                        <input type="text" class="form-control" id="zip" placeholder="" required="" fdprocessedid="ypop05">
-                        <div class="invalid-feedback">
-                            Zip code required.
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                        // Update query
+                        $sql = "UPDATE users SET first_name='$first_name', last_name='$last_name', email = '$email' WHERE id='$user_id'";
+
+                        if ($conn->query($sql) === TRUE) {
+
+                            echo "<meta http-equiv='refresh' content='0'>";  //Reloads the page after submit
+
+                        } else {
+                            $conn->error;
+                        }
+                    }
+                    ?>
                 </div>
             </div>
 
@@ -275,7 +280,60 @@
             </div>
 
             <div class="section" id="your_lists">
-                user your_lists
+                <ol class="list-group list-group-numbered">
+
+                    <?php
+                    $USER_ID = $_SESSION['user_id'];
+                    $sql = "SELECT u.first_name, r.user_review, m.title
+                FROM review_table r
+                JOIN users u ON r.user_id = u.id
+                JOIN movie m ON r.movie_id = m.id
+                WHERE u.id = $USER_ID";
+
+                    $result = mysqli_query($conn, $sql);
+                    if ($result->num_rows > 0) {
+                        // Output data of each row
+                        while ($row = $result->fetch_assoc()) { ?>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold"><?php echo $row['title']; ?></div>
+                                    <?php echo $row['user_review']; ?>
+                                </div>
+                                <i class="fa-solid fa-trash icon" style="margin-top: 15px; color: red;"></i>
+
+                                <script>
+                                    // JavaScript to handle the click event on the delete icon
+                                    document.querySelectorAll('.icon').forEach(icon => {
+                                        icon.addEventListener('click', function() {
+                                            const reviewId = this.closest('.review').getAttribute('data-review-id');
+                                            // Send an AJAX request to the PHP script to delete the review
+                                            fetch('delete_review.php?id=' + reviewId, {
+                                                    method: 'POST'
+                                                })
+                                                .then(response => {
+                                                    if (response.ok) {
+                                                        // If deletion is successful, remove the review element from the DOM
+                                                        this.closest('.review').remove();
+                                                    } else {
+                                                        // Handle error
+                                                        console.error('Failed to delete review');
+                                                    }
+                                                })
+                                                .catch(error => {
+                                                    console.error('Error:', error);
+                                                });
+                                        });
+                                    });
+                                </script>
+                            </li>
+
+                    <?php    }
+                    } ?>
+
+
+
+
+                </ol>
             </div>
 
             <div class="section" id="account_settings">

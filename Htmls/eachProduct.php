@@ -294,9 +294,6 @@ if (isset($_GET['id'])) {
           <i class="fas fa-star star-light submit_star mr-1" id="submit_star_5" data-rating="5"></i>
         </h4>
         <div class="form-group">
-          <input type="text" name="user_name" id="user_name" class="form-control" placeholder="Enter Your Name" />
-        </div>
-        <div class="form-group">
           <textarea name="user_review" id="user_review" class="form-control" placeholder="Type Review Here"></textarea>
         </div>
         <div class="form-group text-center mt-4">
@@ -372,11 +369,11 @@ if (isset($_GET['id'])) {
 
     $('#save_review').click(function() {
 
-      var user_name = $('#user_name').val();
+      var first_name = $('#first_name').val();
 
       var user_review = $('#user_review').val();
 
-      if (user_name == '' || user_review == '') {
+      if (first_name == '' || user_review == '') {
         alert("Please Fill Both Field");
         return false;
       } else {
@@ -385,7 +382,7 @@ if (isset($_GET['id'])) {
           method: "POST",
           data: {
             rating_data: rating_data,
-            user_name: user_name,
+            first_name: first_name,
             user_review: user_review
           },
           success: function(data) {
@@ -449,13 +446,13 @@ if (isset($_GET['id'])) {
             for (var count = 0; count < data.review_data.length; count++) {
               html += '<div class="row mb-3">';
 
-              html += '<div class="col-sm-1"><div class="rounded-circle bg-danger text-white pt-2 pb-2"><h3 class="text-center">' + data.review_data[count].user_name.charAt(0) + '</h3></div></div>';
+              html += '<div class="col-sm-1"><div class="rounded-circle bg-danger text-white pt-2 pb-2"><h3 class="text-center">' + data.review_data[count].first_name.charAt(0) + '</h3></div></div>';
 
               html += '<div class="col-sm-11">';
 
               html += '<div class="card">';
 
-              html += '<div class="card-header"><b>' + data.review_data[count].user_name + '</b></div>';
+              html += '<div class="card-header"><b>' + data.review_data[count].first_name + '</b></div>';
 
               html += '<div class="card-body">';
 

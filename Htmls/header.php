@@ -31,6 +31,8 @@ if (!isset($_SESSION['loggedin'])) {
           <!-- <li><a href="../Htmls/eachProduct.php">MOVIES</a></li> -->
           <li><a href="../Htmls/filterpage.php">SEARCH</a></li>
           <li><a href="../Htmls/userAccount.php">PROFILE</a></li>
+          <!-- <?php $first_name = $_SESSION['first_name'];  ?> -->
+          <!-- <li id="replacingNavText"><a href="../Htmls/signup.php"><?php echo $first_name ?></a></li> -->
           <li id="replacingNavText"><a href="../Htmls/signup.php">SIGN UP</a></li>
         </ul>
       </div>
