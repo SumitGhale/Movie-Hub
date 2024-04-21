@@ -1,4 +1,12 @@
-<?php include 'header.php' ?>
+<?php
+include 'header.php';
+include("database.php");
+
+if ($conn instanceof mysqli) {
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+} ?>
 
 <!doctype html>
 <html lang="en">
@@ -14,115 +22,48 @@
 
 <body>
     <div class="wrapper">
-        <div class="head">
-            <div class="bg-black background"></div>
+        <div class="search">
             <div class="title">
-                <div class="title_line"></div>
-                <h3 class="fs-1">Manage Your Favourites List</h3>
-                <div class="title_line"></div>
+                <h1 id="main_text" class="text-center">Choose Your Favourite Movie</h1>
             </div>
         </div>
+
+
         <div class="container">
-            <div class="favourites_list">
-                <div class="favourite">
-                    <div class="image_and_desc">
-                        <img src="../images/dune.png" alt="image">
-                        <div class="desc">
-                            <h4>Dune</h4>
-                            <p>Release year: 2021</p>
-                        </div>
-                    </div>
-                    <div class="likes_and_remove">
-                        <i class="fa-solid fa-heart fs-2 text-danger"></i>
-                        <p>Remove <i class="delete fa-solid fa-trash fs-2 text-secondary"></i></p>
-                    </div>
-                </div>
-                <hr>
-            </div>
+            <div class="favourites_list mt-5">
+                <?php
+                if ($conn instanceof mysqli) {
+                    $sql = "SELECT m.*
+                    FROM movie AS m
+                    INNER JOIN favorites AS f ON m.id = f.movie_id
+                    WHERE f.user_id = ?";
+                    $stmt = $conn->prepare($sql);
+                    $user_id = 17;
+                    $stmt->bind_param('i', $user_id);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
 
-            <div class="favourites_list">
-                <div class="favourite">
-                    <div class="image_and_desc">
-                        <img src="../images/avengers.jpg" alt="image">
-                        <div class="desc">
-                            <h4>Avengers End Game</h4>
-                            <p>Release year: 2021</p>
-                        </div>
-                    </div>
-                    <div class="likes_and_remove">
-                        <i class="fa-solid fa-heart fs-2 text-danger"></i>
-                        <p>Remove <i class="fa-solid fa-trash fs-2 text-secondary"></i></p>
-                    </div>
-                </div>
-                <hr>
-            </div>
-
-            <div class="favourites_list">
-                <div class="favourite">
-                    <div class="image_and_desc">
-                        <img src="../images/conjuring.jpg" alt="image">
-                        <div class="desc">
-                            <h4>Conjuring</h4>
-                            <p>Release year: 2021</p>
-                        </div>
-                    </div>
-                    <div class="likes_and_remove">
-                        <i class="fa-solid fa-heart fs-2 text-danger"></i>
-                        <p>Remove <i class="fa-solid fa-trash fs-2 text-secondary"></i></p>
-                    </div>
-                </div>
-                <hr>
-            </div>
-
-            <div class="favourites_list">
-                <div class="favourite">
-                    <div class="image_and_desc">
-                        <img src="../images/fastandfurious.jpg" alt="image">
-                        <div class="desc">
-                            <h4>Fast And Furious</h4>
-                            <p>Release year: 2021</p>
-                        </div>
-                    </div>
-                    <div class="likes_and_remove">
-                        <i class="fa-solid fa-heart fs-2 text-danger"></i>
-                        <p>Remove <i class="fa-solid fa-trash fs-2 text-secondary"></i></p>
-                    </div>
-                </div>
-                <hr>
-            </div>
-
-            <div class="favourites_list">
-                <div class="favourite">
-                    <div class="image_and_desc">
-                        <img src="../images/madagascar.jpg" alt="image">
-                        <div class="desc">
-                            <h4>Madagascar</h4>
-                            <p>Release year: 2021</p>
-                        </div>
-                    </div>
-                    <div class="likes_and_remove">
-                        <i class="fa-solid fa-heart fs-2 text-danger"></i>
-                        <p>Remove <i class="fa-solid fa-trash fs-2 text-secondary"></i></p>
-                    </div>
-                </div>
-                <hr>
-            </div>
-
-            <div class="favourites_list">
-                <div class="favourite">
-                    <div class="image_and_desc">
-                        <img src="../images/oppenheimer.jpg" alt="image">
-                        <div class="desc">
-                            <h4>Oppenheimer</h4>
-                            <p>Release year: 2021</p>
-                        </div>
-                    </div>
-                    <div class="likes_and_remove">
-                        <i class="fa-solid fa-heart fs-2 text-danger"></i>
-                        <p>Remove <i class="fa-solid fa-trash fs-2 text-secondary"></i></p>
-                    </div>
-                </div>
-                <hr>
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                ?>
+                            <div class="favourite mb-2">
+                                <div class="image_and_desc">
+                                    <img src="../images/<?php echo $row['poster_image'] ?>" alt="image">
+                                </div>
+                                <div class="likes_and_remove">
+                                    <div class="desc mt-2">
+                                        <h4><?php echo $row['title'] ?></h4>
+                                        <p>Release year: <?php echo $row['release_date'] ?></p>
+                                    </div>
+                                    <form action="crud.php" method="POST">
+                                        <input type="hidden" name="row_id" value="<?php echo $row['id'] ?>">
+                                        <button type="submit" class="btn btn-danger mb-2">Remove</button>
+                                    </form>
+                                </div>
+                            </div>
+                <?php   }
+                    }
+                } ?>
             </div>
         </div>
 
@@ -131,8 +72,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <script src="../js/favourite.js">
-        
-    </script>    
+
+    </script>
 </body>
 
 </html>

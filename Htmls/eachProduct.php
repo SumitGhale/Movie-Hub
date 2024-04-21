@@ -90,8 +90,11 @@ if (isset($_GET['id'])) {
                 </p>
               </div>
               <div class="titleRight">
-                <button type="button" class="btn btn-primary p-10"><i class="fa-solid fa-share-nodes"></i></button>
-                <button type="button" class="btn btn-danger me-4 p-10">Add to watchlist +</button>
+                <form action="crud.php" method="POST">
+                  <input type="hidden" name="insert_row_id" value="<?php echo $row['id'] ?>">
+                  <button type="button" class="btn btn-primary p-10"><i class="fa-solid fa-share-nodes"></i></button>
+                  <button type="submit" class="btn btn-danger me-4">Add to favorites +</button>
+                </form>
               </div>
             </div>
           <?php
