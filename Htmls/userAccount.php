@@ -280,12 +280,14 @@
                 </div>
             </div>
 
+            <!-- your reviews  -->
+
             <div class="section" id="your_lists">
                 <ol class="list-group list-group-numbered">
 
                     <?php
                     $USER_ID = $_SESSION['user_id'];
-                    $sql = "SELECT u.first_name, r.user_review, m.title
+                    $sql = "SELECT *
                 FROM review_table r
                 JOIN users u ON r.user_id = u.id
                 JOIN movie m ON r.movie_id = m.id
@@ -300,11 +302,41 @@
                                     <div class="fw-bold"><?php echo $row['title']; ?></div>
                                     <?php echo $row['user_review']; ?>
                                 </div>
+<<<<<<< HEAD
                                 <form id="deleteReviewForm" method="post" action="delete_review.php">
                                     <button type="submit" name="deleteReview" style="background: none; border: none; padding: 0; margin: 0;">
                                         <i class="fa-solid fa-trash icon" style="margin-top: 15px; color: red; cursor: pointer;"></i>
                                     </button>
                                 </form>
+=======
+                                <i class="fa-solid fa-trash icon" style="margin-top: 15px; color: red; cursor: pointer" data-review-id="<?php echo $row['review_id']; ?>"></i>
+
+                                <script>
+                                    // JavaScript to handle the click event on the delete icon
+                                    document.querySelectorAll('.icon').forEach(icon => {
+                                        icon.addEventListener('click', function() {
+                                            const reviewId = this.getAttribute('data-review-id');
+                                            const listItem = this.closest('li');
+                                            // Send an AJAX request to the PHP script to delete the review
+                                            fetch('delete_review.php?id=' + reviewId, {
+                                                    method: 'POST'
+                                                })
+                                                .then(response => {
+                                                    if (response.ok) {
+                                                        // If deletion is successful, remove the review element from the DOM
+                                                        listItem.remove();
+                                                    } else {
+                                                        // Handle error
+                                                        console.error('Failed to delete review');
+                                                    }
+                                                })
+                                                .catch(error => {
+                                                    console.error('Error:', error);
+                                                });
+                                        });
+                                    });
+                                </script>
+>>>>>>> 2e5b7adfbb4a12f92a020e60c59139110f532763
                             </li>
 
                     <?php    }

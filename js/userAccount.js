@@ -15,7 +15,7 @@ let logout_btn = document.querySelector("#logout_btn");
 let side_buttons = document.querySelectorAll(".side_btns");
 
 profile_btn.addEventListener(('click'), () => {
-    console.log("profile butotn was clicked");
+    // console.log("profile butotn was clicked");
     reset();
     profile_btn.classList.add('active');
     profile_btn.classList.remove('link-body-emphasis');
@@ -23,7 +23,7 @@ profile_btn.addEventListener(('click'), () => {
 })
 
 watchlists_btn.addEventListener(('click'), () => {
-    console.log("watchlists_btn butotn was clicked");
+    // console.log("watchlists_btn butotn was clicked");
     reset();
     watchlists_btn.classList.add('active')
     watchlists_btn.classList.remove('link-body-emphasis');
@@ -31,7 +31,7 @@ watchlists_btn.addEventListener(('click'), () => {
 })
 
 yourlists_btn.addEventListener(('click'), () => {
-    console.log("yourlists_btn butotn was clicked");
+    // console.log("yourlists_btn butotn was clicked");
     reset();
     yourlists_btn.classList.add('active')
     yourlists_btn.classList.remove('link-body-emphasis');
@@ -39,7 +39,7 @@ yourlists_btn.addEventListener(('click'), () => {
 })
 
 account_settings_btn.addEventListener(('click'), () => {
-    console.log("account_settings_btn butotn was clicked");
+    // console.log("account_settings_btn butotn was clicked");
     reset();
     account_settings_btn.classList.add('active')
     account_settings_btn.classList.remove('link-body-emphasis');
@@ -47,7 +47,7 @@ account_settings_btn.addEventListener(('click'), () => {
 })
 
 logout_btn.addEventListener(('click'), () => {
-    console.log("logout butotn was clicked");
+    // console.log("logout butotn was clicked");
     reset();
     logout_btn.classList.add('active')
     logout_btn.classList.remove('link-body-emphasis');

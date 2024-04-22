@@ -11,11 +11,11 @@
    <div class="quickLinks">
       <ul>
       <li><span class="boldHeader"><a href="">Quick Links</a></span></li>
-      <li><a href="">Home</a></li>
-      <li><a href="">Favourites</a></li>
-      <li><a href="">Search</a></li>
-      <li><a href="">Profile</a></li>
-      <li><a href="">Sign</a> in</li>
+      <li><a href="index.php">Home</a></li>
+      <li><a href="favourites.php">Favourites</a></li>
+      <li><a href="filterpage.php">Search</a></li>
+      <li><a href="userAccount.php">Profile</a></li>
+      <li><a href="signup.php">Sign Up</a> in</li>
       </ul>
    </div>
   

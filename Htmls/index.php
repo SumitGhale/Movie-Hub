@@ -25,12 +25,12 @@ include("database.php");
 
 
   <style>
-/* Defining CSS styles for active buttons */
-.categoryBtn.active {
-    background-color: red;
-    color: white;
-}
-</style>
+    /* Defining CSS styles for active buttons */
+    .categoryBtn.active {
+      background-color: red;
+      color: white;
+    }
+  </style>
 
 </head>
 
@@ -114,6 +114,7 @@ include("database.php");
       }
     }
     ?>
+  <p class="text-center"> 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9...more</p>
 
   </div>
 
@@ -205,32 +206,33 @@ include("database.php");
   // Event listeners for filter buttons
   document.getElementById('toprated_button').addEventListener('click', function() {
     showMovies('top_rated');
-   
+
 
   });
 
   document.getElementById('justreleased_button').addEventListener('click', function() {
     showMovies('just_released');
-   
+
   });
 
   document.getElementById('upcoming_button').addEventListener('click', function() {
     showMovies('upcoming');
-    
+
   });
 </script>
 
 
 <script>
-// JavaScript function to highlight the clicked button
-function highlightButton(button) {
+  // JavaScript function to highlight the clicked button
+  function highlightButton(button) {
     // Remove 'active' class from all buttons
     document.querySelectorAll('.categoryBtn').forEach(btn => {
-        btn.classList.remove('active');
+      btn.classList.remove('active');
     });
 
     // Add 'active' class to the clicked button
     button.classList.add('active');
-}
+  }
 </script>
+
 </html>

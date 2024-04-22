@@ -39,7 +39,7 @@ if ($conn instanceof mysqli) {
                     <div class="input-group">
                         <input type="text" name="search" value="<?php if (isset($_GET['search'])) {
                                                                     echo $_GET['search'];
-                                                                } ?>" class="form-control search_bar" placeholder="Recipient's username">
+                                                                } ?>" class="form-control search_bar" placeholder="Please enter movie name">
                         <button type="submit" class=" btn btn-danger px-5"> Search </button>
                     </div>
                 </form>
