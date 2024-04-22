@@ -15,11 +15,10 @@
 .headerLinks ul{
     display: flex;
     gap: 55px;
+    margin-bottom: 0;
+    margin-right: 1rem;
 }
 
-.headerLinks{
-   flex: 1;
-}
 
 .logoIcon img{
     height: 80px;
@@ -40,29 +39,3 @@
     list-style-type: none;
 }
 
-/* .footer{
-    background-color: black;
-}
-.footerLogo img{
-    height: 80px;
-    width: auto;
-    margin-left: 46%;
-}
-
-.footerIcons i{
-    color: white;
-}
-
-.footerIcons {
-    display: flex;
-    gap: 2%;
-    justify-content: center;
-    margin-top: 2%;
-}
-
-.footerText{
-    color: white;
-    justify-content: center;
-    display: flex;
-    margin-top: 2%;
-} */

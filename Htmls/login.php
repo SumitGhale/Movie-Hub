@@ -1,6 +1,6 @@
 <?php
-session_start();
-
+// session_start();
+ include 'header.php'; 
 // Include database connection file
 include_once("database.php");
 
@@ -14,7 +14,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         // Retrieve user data from database
     
-        $sql = "SELECT id,password,email FROM users WHERE email = '$email'";
+        $sql = "SELECT id,password,email,first_name FROM users WHERE email = '$email'";
         $result = mysqli_query($conn, $sql);
 
         if (mysqli_error($conn)) {
@@ -28,6 +28,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                     $_SESSION['user_id'] = $row['id'];
                     $_SESSION['email'] = $row['email'];
                     $_SESSION['loggedin'] = true;
+            $_SESSION['first_name'] = $row['first_name'];
                     header("location: index.php"); 
                     exit;
                 } else {
@@ -37,6 +38,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
+
+
 
 
 
@@ -55,7 +58,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<?php include 'header.php'; ?>
+
 </head>
 <body>
 

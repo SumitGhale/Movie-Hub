@@ -1,5 +1,5 @@
 <?php include 'header.php';
-session_start();
+// session_start();
 ?>
 
 <!doctype html>
@@ -27,13 +27,14 @@ session_start();
             $first_name = $row['first_name'];
             $last_name = $row['last_name'];
             $email = $row['email'];
+
         }
     }
     ?>
     <!-- rectangle with profile image -->
     <div id="user_image_rectangle">
         <div id="profile_desc">
-            <img id="profile_pic" src="../images/mathew.jpg" alt="image">
+            <img id="profile_pic" src="../images/profilePic.jpg" alt="image">
         </div>
 
         <div class="topUserDetails">
@@ -299,32 +300,11 @@ session_start();
                                     <div class="fw-bold"><?php echo $row['title']; ?></div>
                                     <?php echo $row['user_review']; ?>
                                 </div>
-                                <i class="fa-solid fa-trash icon" style="margin-top: 15px; color: red;"></i>
-
-                                <script>
-                                    // JavaScript to handle the click event on the delete icon
-                                    document.querySelectorAll('.icon').forEach(icon => {
-                                        icon.addEventListener('click', function() {
-                                            const reviewId = this.closest('.review').getAttribute('data-review-id');
-                                            // Send an AJAX request to the PHP script to delete the review
-                                            fetch('delete_review.php?id=' + reviewId, {
-                                                    method: 'POST'
-                                                })
-                                                .then(response => {
-                                                    if (response.ok) {
-                                                        // If deletion is successful, remove the review element from the DOM
-                                                        this.closest('.review').remove();
-                                                    } else {
-                                                        // Handle error
-                                                        console.error('Failed to delete review');
-                                                    }
-                                                })
-                                                .catch(error => {
-                                                    console.error('Error:', error);
-                                                });
-                                        });
-                                    });
-                                </script>
+                                <form id="deleteReviewForm" method="post" action="delete_review.php">
+                                    <button type="submit" name="deleteReview" style="background: none; border: none; padding: 0; margin: 0;">
+                                        <i class="fa-solid fa-trash icon" style="margin-top: 15px; color: red; cursor: pointer;"></i>
+                                    </button>
+                                </form>
                             </li>
 
                     <?php    }

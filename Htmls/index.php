@@ -1,23 +1,5 @@
 <?php
 include("database.php");
-session_start();
-
-
-if ($conn instanceof mysqli) {
-  if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-  }
-}
-
-//  echo $_SESSION['email'];
-if ($_SESSION['loggedin'] !== true) {
-  header("location: login.php");
-}
-
-//Code to echo out test the useremail
-// if (isset($_SESSION['email'])) {
-//   echo '<h1>Welcome ' . $_SESSION['email'] . '</h1>';
-// }
 ?>
 
 
@@ -35,6 +17,12 @@ if ($_SESSION['loggedin'] !== true) {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <?php include 'header.php'; ?>
+  
+<?php
+  if ($_SESSION['loggedin'] !== true) {
+  header("location: login.php");
+} ?>
+
 
   <style>
 /* Defining CSS styles for active buttons */
