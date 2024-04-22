@@ -21,7 +21,9 @@ if (!isset($_SESSION['loggedin'])) {
 <link rel="stylesheet" href="../Css/header.css">
 <div class="navbar">
   <div class="logoIcon">
-    <img src="../images/logo.png" alt="Logo Icon" />
+    <a href="index.php">
+    <img src="../images/logo.png" alt="Logo Icon"/>
+    </a>
   </div>
 
       <div class="headerLinks">

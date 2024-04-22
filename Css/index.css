@@ -6,10 +6,10 @@
 }
 
 .frontScreen{
-    height: 130vh;
+    height: 105vh;
     width: 100%;
     display: flex;
-    background-color: #ebecf0;
+    background-color: #31363F;
     align-items: center;
     gap: 3%;
 }
@@ -219,9 +219,9 @@
     background-color: white;
 }
 
-.upcomingBtn1 :hover{
-    color: white;
+.upcomingBtn1:hover{
     background-color: #534d4d;
+    color: black;
 }
 
 .upcomingBtn2{

@@ -1,13 +1,12 @@
 <?php
-// Establish database connection
-// Assuming you already have $conn set up
-
+include ("database.php");
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['id'])) {
     // Get review ID from the request
     $reviewId = $_GET['id'];
 
+
     // Prepare and execute SQL statement to delete the review
-    $sql = "DELETE FROM reviews WHERE id = ?";
+    $sql = "DELETE FROM review_table WHERE review_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('i', $reviewId);
     
